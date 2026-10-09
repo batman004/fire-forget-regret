@@ -11,12 +11,16 @@ understand the idea, then decide which real tool your team needs.
 ```
 stitch/          the library: ~1,600 lines, sqlite3 + asyncio, nothing to install
 hook/          Part A: three ways a background asyncio task lives or dies
+examples/      quickstart.py: the smallest program, kill it and rerun
 demo/          two workloads on top of stitch, plus fake third-party services
-comparisons/   the same pipeline on Celery + RabbitMQ (optional, needs Docker)
+comparisons/   the same pipeline on Celery + RabbitMQ and on Temporal (optional, needs Docker)
+scripts/       record_demo.py: a reproducible replay for the backup recording
 tests/         unittest, Python 3.11 - 3.14
 ```
 
 Requires Python 3.11+. Clone and run; nothing to install for `stitch`, `hook` or `demo`.
+To use the library in your own project: `pip install stitch-durable` once it is published (the
+name `stitch` is taken on PyPI; the import is still `import stitch`), or copy the `stitch/` directory.
 
 ## The library in 30 lines
 
@@ -138,6 +142,24 @@ python -m demo triage --events 200 --concurrency 20 --crash-at evt-0100:classify
 python -m demo providers                       # live breaker state of each provider
 ```
 
+## Memory management for long-running processes
+
+```bash
+python -m demo memory                    # 5,000 items of 20 KB; --items / --kb to scale
+```
+
+The same work done four ways, with peak memory measured by `tracemalloc`:
+
+| approach | peak |
+|---|---|
+| build a list of everything first | ~99 MiB |
+| unbounded queue, fast producer | ~99 MiB (the queue *is* the list) |
+| stream through a bounded queue (what stitch does) | ~0.4 MiB |
+| bounded queue, but a module-level list keeps every result | ~99 MiB again |
+
+Stream rather than build lists, bound every queue, and watch for caches, logs and metric
+buffers that quietly keep what you finished.
+
 ## Comparison: the same pipeline on Celery and on Temporal
 
 `comparisons/` runs order fulfilment on both, killing a worker mid-run. Measured with 6 orders:
@@ -153,6 +175,18 @@ a chain, and no tool, including a durable execution engine, removes the crash-af
 gap. Idempotency does. See each directory's README for how to run it (Docker, one `pip install`).
 `stitch` adds an audit trail, provider fallbacks and degraded results on top; Temporal adds
 distribution, timers and versioning that stitch deliberately does not have.
+
+## The backup recording
+
+```bash
+make record          # replays the whole demo, typed, with pauses (~7 min): screen-record it
+make record-fast     # the same replay with no typing or pauses
+make cast            # or record to demo.cast with asciinema
+python scripts/record_demo.py --section triage --manual   # one part, Enter before each command
+```
+
+The replay starts its own vendors on a free port with a throwaway state directory, so it never
+touches your checkpoints or a vendors process you have running.
 
 ## Which one do I need?
 
