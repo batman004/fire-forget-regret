@@ -23,8 +23,14 @@ class VendorsDown(Exception):
     pass
 
 
-async def post(path: str, payload: dict, *, timeout: float = TIMEOUT) -> dict:
-    """POST JSON to a vendor, sending the current step's idempotency key if any."""
+async def post(path: str, payload: dict, *, timeout: float | None = None) -> dict:
+    """POST JSON to a vendor, sending the current step's idempotency key if any.
+
+    The default timeout is read when the call is made, so a live run can raise it
+    and sit through a paused network instead of giving up.
+    """
+    if timeout is None:
+        timeout = TIMEOUT
     headers = {"Content-Type": "application/json"}
     key = idempotency_key()
     if key is not None:

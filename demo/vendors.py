@@ -41,7 +41,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-from . import ui
+from . import board, ui
 from .secfakes import SecurityFakes
 
 DEFAULT_PORT = 8765
@@ -264,6 +264,10 @@ class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     def do_GET(self):
+        if self.path in ("/", "/board"):
+            return self._send_html(board.PAGE)
+        if self.path == "/admin/board":
+            return self._send(200, board.payload(self.server.vendors), {"Cache-Control": "no-store"})
         if self.path == "/admin/control":
             return self._send(200, self.server.vendors.control_state())
         if self.path == "/health":
@@ -315,6 +319,18 @@ class Handler(BaseHTTPRequestHandler):
         if "llm_stopped" in body:
             vendors.set_llm_stopped(bool(body["llm_stopped"]))
         self._send(200, vendors.control_state())
+
+    def _send_html(self, html: str):
+        data = html.encode()
+        try:
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(data)))
+            self.send_header("Cache-Control", "no-store")
+            self.end_headers()
+            self.wfile.write(data)
+        except (BrokenPipeError, ConnectionResetError):
+            pass
 
     def _send(self, status: int, payload: dict, headers: dict | None = None):
         data = json.dumps(payload).encode()

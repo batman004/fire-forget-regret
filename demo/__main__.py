@@ -2,8 +2,8 @@
 
   Hands on: one pipeline, break it yourself
     python -m demo vendors --chaos calm        terminal 1: every external call
-    python -m demo control                     terminal 2: pause the network, or stop LLM calls
-    python -m demo live                        terminal 3: Ctrl-C whenever, then: python -m demo resume
+    open http://127.0.0.1:8765/                the live board: jobs, steps, failure buttons
+    python -m demo live                        terminal 2: Ctrl-C whenever, then: python -m demo resume
 
   Fake third parties
     python -m demo vendors                     terminal 2: payment, carrier, LLM, dashboard...

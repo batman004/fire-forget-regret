@@ -52,9 +52,14 @@ app.conf.update(
 CRASH_MARKER = Path(os.environ.get("CELERY_CRASH_MARKER", "/tmp/celery-crash-marker"))
 
 
-def maybe_crash(order_id: str, step: str) -> None:
-    """Same idea as stitch's --crash-at: SIGKILL the worker once at CRASH_AT=order:step."""
-    if os.environ.get("CRASH_AT") == f"{order_id}:{step}" and not CRASH_MARKER.exists():
+def maybe_crash(order_id: str, step: str, phase: str = "before") -> None:
+    """Same idea as stitch's --crash-at: SIGKILL the worker once at CRASH_AT=order:step[:after].
+
+    "after" means the vendor did the work but the message was not acknowledged yet.
+    """
+    spec = os.environ.get("CRASH_AT", "").split(":")
+    wanted = (spec + ["before"])[:3] if len(spec) == 2 else spec
+    if wanted == [order_id, step, phase] and not CRASH_MARKER.exists():
         CRASH_MARKER.write_text("crashed")
         sys.stdout.flush()
         os.kill(os.getpid(), 9)
@@ -89,6 +94,7 @@ def fulfil_order(self, order_id: str) -> str:
                      ("send_confirmation", email)]:
         maybe_crash(order_id, name)
         fn(order)
+        maybe_crash(order_id, name, "after")
         print(f"{order_id} {name} ok (attempt {self.request.retries + 1})", flush=True)
     return order_id
 
@@ -101,6 +107,7 @@ def step_task(name, fn):
     def run(self, order_id: str) -> str:
         maybe_crash(order_id, name)
         fn(orders.lookup(order_id))
+        maybe_crash(order_id, name, "after")
         print(f"{order_id} {name} ok (attempt {self.request.retries + 1})", flush=True)
         return order_id          # the next link receives only the id; state lives in the vendors
     return run

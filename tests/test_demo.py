@@ -133,6 +133,35 @@ class DemoTest(unittest.TestCase):
         with urllib.request.urlopen(intel, timeout=1) as response:
             self.assertEqual(response.status, 200)
 
+    def test_board_page_and_snapshot(self):
+        from demo.board import snapshot_db
+        from stitch import Store
+
+        with urllib.request.urlopen(self.url + "/", timeout=1) as response:
+            page = response.read().decode()
+            self.assertEqual(response.headers.get("Cache-Control"), "no-store")
+        self.assertIn("Pause network", page)
+
+        with urllib.request.urlopen(self.url + "/admin/board", timeout=1) as response:
+            body = json.load(response)
+        self.assertFalse(body["control"]["paused"])
+        self.assertIn("runs", body)
+        self.assertIn("eu-west-1", body["llm"]["regions"])
+
+        path = Path(self.tmp.name) / "checkpoints.db"
+        store = Store(path)
+        store.open_run("triage:demo", "triage", {"events": 2})
+        store.set_item("triage:demo", "evt-0001", "running",
+                       input=json.dumps({"id": "evt-0001", "type": "port_scan", "asset": "vpn-gateway-01"}))
+        store.step_started("triage:demo", "evt-0001", "enrich", 0)
+        store.close()
+        snap = snapshot_db(path)
+        item = snap["runs"][0]["items"][0]
+        self.assertEqual(item["label"], "Port scan · vpn-gateway-01")
+        self.assertEqual(item["steps"]["enrich"]["status"], "running")
+        self.assertEqual([col["id"] for col in snap["runs"][0]["columns"]],
+                         ["enrich", "summarise", "classify", "publish"])
+
 
 class UiTest(unittest.TestCase):
     def test_ledger_flags_duplicates(self):

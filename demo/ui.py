@@ -392,7 +392,7 @@ def vendor_banner(port: int, chaos: str, seed: int, latency: tuple[float, float]
     say(rule(f"fake vendors on 127.0.0.1:{port}"))
     say(f"   chaos {bold(chaos)} · seed {seed} · latency {latency[0]:.2f}-{latency[1]:.2f}s")
     say(dim("   orders · intel · llm · dashboard"))
-    say(dim("   other terminal: python -m demo control"))
+    say(dim(f"   watch the run:  http://127.0.0.1:{port}/"))
     say()
 
 
