@@ -22,6 +22,7 @@
     python -m demo providers [add|remove|enable|disable NAME]   the LLM provider pool
     python -m demo resume                      continue everything unfinished
     python -m demo heal                        redo steps that used a fallback
+    python -m demo memory                      peak memory: list vs unbounded vs bounded stream
     python -m demo reset
 """
 
@@ -111,6 +112,10 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("ui", help="show what the dashboard displays")
     p.add_argument("--of", type=int, help="how many events there should be, to show what is missing")
     p.add_argument("--limit", type=int, default=30)
+
+    p = sub.add_parser("memory", help="peak memory: list vs unbounded queue vs bounded stream")
+    p.add_argument("--items", type=int, default=5000)
+    p.add_argument("--kb", type=int, default=20, help="payload per item")
 
     sub.add_parser("ledger", help="show what the order vendors did")
     sub.add_parser("reset", help="delete checkpoints, labels and all vendor state")
@@ -401,6 +406,12 @@ def cmd_ui(args) -> int:
     return 0
 
 
+def cmd_memory(args) -> int:
+    from . import memory
+    memory.run(args.items, args.kb)
+    return 0
+
+
 def cmd_ledger(args) -> int:
     try:
         ui.render_ledger(client.get("/ledger"))
@@ -500,6 +511,7 @@ COMMANDS = {
     "live": cmd_live, "control": cmd_control,
     "status": cmd_status, "trace": cmd_trace, "providers": cmd_providers, "llm": cmd_llm,
     "resume": cmd_resume, "heal": cmd_heal, "ui": cmd_ui, "ledger": cmd_ledger, "reset": cmd_reset,
+    "memory": cmd_memory,
 }
 
 if __name__ == "__main__":

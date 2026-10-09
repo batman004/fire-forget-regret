@@ -138,13 +138,21 @@ python -m demo triage --events 200 --concurrency 20 --crash-at evt-0100:classify
 python -m demo providers                       # live breaker state of each provider
 ```
 
-## Comparison: the same pipeline on Celery + RabbitMQ
+## Comparison: the same pipeline on Celery and on Temporal
 
-`comparisons/celery_compare/` runs order fulfilment on Celery in the two styles teams use:
-one task per order (the job is the unit of retry, so a carrier 429 re-charges the card), and
-a chain with one task per step (a real improvement: the queue remembers where each order is).
-It still has no record of what happened, no skip-if-done, no fallbacks, and no resume-all.
-See that directory's README for how to run it (needs Docker and one `pip install`).
+`comparisons/` runs order fulfilment on both, killing a worker mid-run. Measured with 6 orders:
+
+| crash | Celery, task per order | Celery, chain | Temporal | stitch |
+|---|---|---|---|---|
+| before a step's side effect | whole order restarts: charged **twice** | step reruns: **once** | **once** | **once** |
+| after the charge, no idempotency key | twice | twice | twice | twice |
+| after the charge, with a key | n/a (not sent) | n/a (not sent) | once | once |
+
+The lesson is the one in the talk: a queue's unit of retry is the job unless you split it into
+a chain, and no tool, including a durable execution engine, removes the crash-after-side-effect
+gap. Idempotency does. See each directory's README for how to run it (Docker, one `pip install`).
+`stitch` adds an audit trail, provider fallbacks and degraded results on top; Temporal adds
+distribution, timers and versioning that stitch deliberately does not have.
 
 ## Which one do I need?
 
