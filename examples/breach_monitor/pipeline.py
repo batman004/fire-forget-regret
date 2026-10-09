@@ -9,7 +9,7 @@
 
     python pipeline.py doctor            what is configured, what is reachable (no spend)
     python pipeline.py run               collect + process, with a spend cap
-    python pipeline.py status | trace ID | resume | heal | peek | report | providers
+    python pipeline.py status | trace ID | resume | heal | peek | report | providers | ui
 
 What stitch gives it: every completed step is checkpointed, so a kill -9 resumes mid-article; a
 step retries by itself; the audit table says why anything happened; when the LLM is out of credits
@@ -54,6 +54,23 @@ from stitch import (  # noqa: E402
 )
 
 # --------------------------------------------------------------------------- configuration
+
+def load_dotenv(path: Path) -> None:
+    """KEY=VALUE lines from a .env next to this file. Never overrides what is already exported."""
+    if not path.is_file():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.removeprefix("export ").strip()
+        value = value.strip().strip("'\"")
+        if key and value:
+            os.environ.setdefault(key, value)
+
+
+load_dotenv(Path(__file__).with_name(".env"))
 
 CONTACT = os.environ.get("BREACH_MONITOR_CONTACT", "set BREACH_MONITOR_CONTACT to an email or URL")
 UA = f"breach-monitor/0.1 (research prototype; {CONTACT})"
@@ -300,6 +317,13 @@ def cost_usd(model: str, tokens_in: int, tokens_out: int) -> float:
     return (tokens_in * pin + tokens_out * pout) / 1_000_000
 
 
+def build_request(model: str, system: str, user: str, tool: dict) -> dict:
+    """The one place the Messages API request is assembled (and tested against the real SDK signature)."""
+    return {"model": model, "max_tokens": 1800, "system": system, "tools": [tool],
+            "tool_choice": {"type": "tool", "name": tool["name"]},
+            "messages": [{"role": "user", "content": user}]}
+
+
 class ClaudeClient:
     """One provider in the pool: a model behind the Anthropic API, errors mapped for the breaker."""
 
@@ -319,10 +343,7 @@ class ClaudeClient:
             raise QuotaExhausted(f"spend cap of ${RT.budget_usd:.2f} reached", retry_after=3600)
         import anthropic
         try:
-            response = await self._sdk().messages.create(
-                model=self.model, max_tokens=1800, temperature=0, system=system,
-                tools=[tool], tool_choice={"type": "tool", "name": tool["name"]},
-                messages=[{"role": "user", "content": user}])
+            response = await self._sdk().messages.create(**build_request(self.model, system, user, tool))
         except anthropic.RateLimitError as exc:
             wait = exc.response.headers.get("retry-after", "")
             raise RateLimited("rate limited", retry_after=float(wait) if wait.isdigit() else 10.0)
@@ -1085,6 +1106,61 @@ def cmd_report(args) -> int:
     return 0
 
 
+def _public_breach(doc: dict) -> dict:
+    graph = doc.get("graph") or {}
+    summary = doc.get("plain_summary") or ""
+    return {
+        "title": doc.get("title"),
+        "url": doc.get("url"),
+        "source": doc.get("source"),
+        "summary": str(summary)[:500],
+        "organization": doc.get("organization"),
+        "sector": doc.get("sector"),
+        "severity": doc.get("severity"),
+        "analysis_source": doc.get("analysis_source"),
+        "revision": doc.get("revision"),
+        "records_affected": doc.get("records_affected"),
+        "what_to_do": [str(x) for x in (doc.get("what_to_do") or [])][:4],
+        "timeline": [str(x) for x in (doc.get("timeline") or [])][:5],
+        "graph": {"nodes": list(graph.get("nodes") or [])[:16], "edges": list(graph.get("edges") or [])[:24]},
+    }
+
+
+def _attach_stored_breaches(state: dict) -> None:
+    try:
+        mongo = MongoSink()
+        try:
+            rows = mongo.recent(80)
+            counts = mongo.counts()
+        finally:
+            mongo.close()
+    except Exception as exc:
+        state["services"] = {"mongo": f"down ({type(exc).__name__})"}
+        return
+    state["services"] = {"mongo": "up", "breaches": counts["breaches"], "candidates": counts["candidates"]}
+    by_id = {}
+    for row in rows:
+        ident = row.get("id") or row.get("_id")
+        if ident:
+            by_id[str(ident)] = row
+    for run in state["runs"]:
+        if run.get("workflow") != "breach-monitor":
+            continue
+        for item in run["items"]:
+            doc = by_id.get(item["id"])
+            if not doc:
+                continue
+            public = _public_breach(doc)
+            item["document"] = public
+            item["severity"] = public.get("severity") or item.get("severity")
+
+
+def cmd_ui(args) -> int:
+    import demo.board as board
+    board.serve(Path(STATE_DB), args.port, title="breach monitor", enrich=_attach_stored_breaches)
+    return 0
+
+
 def cmd_doctor(args) -> int:
     ok = True
 
@@ -1169,12 +1245,14 @@ def main(argv=None) -> int:
     p.add_argument("--model", default="claude-sonnet-5-5")
     p.add_argument("--priority", type=int, default=2)
     p = sub.add_parser("doctor"); p.add_argument("--sources-check", action="store_true")
+    p = sub.add_parser("ui", help="live board: traces, graphs, and the audit log")
+    p.add_argument("--port", type=int, default=8780)
 
     args = ap.parse_args(argv)
     if args.cmd in ("run", "resume", "heal"):
         return asyncio.run({"run": cmd_run, "resume": cmd_resume, "heal": cmd_heal}[args.cmd](args))
     return {"status": cmd_status, "trace": cmd_trace, "peek": cmd_peek, "report": cmd_report,
-            "providers": cmd_providers, "doctor": cmd_doctor}[args.cmd](args)
+            "providers": cmd_providers, "doctor": cmd_doctor, "ui": cmd_ui}[args.cmd](args)
 
 
 if __name__ == "__main__":

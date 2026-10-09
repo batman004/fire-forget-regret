@@ -101,6 +101,21 @@ class AnalysisTest(unittest.TestCase):
         self.assertIn("<article>", pl.article_block({"title": "t", "source": "s", "url": "u"}, {"text": "hi"}))
 
 
+class RequestShapeTest(unittest.TestCase):
+    def test_request_matches_the_installed_sdk_signature(self):
+        try:
+            import inspect
+
+            from anthropic.resources.messages import AsyncMessages
+        except ImportError:
+            self.skipTest("anthropic is not installed")
+        accepted = set(inspect.signature(AsyncMessages.create).parameters)
+        for tool in (pl.ANALYSE_TOOL, pl.EXPLAIN_TOOL):
+            request = pl.build_request("claude-haiku-4-5", pl.SYSTEM, "u", tool)
+            self.assertEqual(set(request) - accepted, set(), "request has arguments the SDK rejects")
+            self.assertEqual(request["tool_choice"]["name"], tool["name"])
+
+
 class RobotsTest(unittest.TestCase):
     def setUp(self):
         pl._robots.clear()

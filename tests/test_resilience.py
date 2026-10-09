@@ -126,6 +126,8 @@ class WorkflowTest(unittest.TestCase):
         self.pool = Pool("llm", factory, tuning=TUNING, defaults=[("only", 1, {})])
 
         async def summarise_call(c, text):
+            if getattr(test, "broken", False):
+                raise ValueError("a bug in the step")
             if not test.healthy:
                 raise QuotaExhausted("insufficient credits")
             return await c.complete(text)
@@ -165,6 +167,23 @@ class WorkflowTest(unittest.TestCase):
         self.assertEqual((stats.items_done, stats.items_degraded), (2, 0))
         self.assertEqual(self.published[2:], [("e1", "llm"), ("e2", "llm")])  # upsert, in order
         self.assertEqual(store.degraded_items("triage-test:default"), [])
+
+    def test_a_failed_heal_stays_healable(self):
+        store = Store(self.db)
+        asyncio.run(self.triage.map([{"id": "e1"}], store=store))
+        self.assertEqual(len(store.degraded_items("triage-test:default")), 1)
+
+        self.broken = True                                   # the rerun itself fails
+        time.sleep(0.35)
+        asyncio.run(stitch.heal(store=store))
+        self.assertEqual(store.item_status("triage-test:default", "e1"), "failed")
+        self.assertEqual(len(store.degraded_items("triage-test:default")), 1)   # still flagged
+
+        self.broken, self.healthy = False, True              # fixed: the next heal finishes the job
+        asyncio.run(stitch.heal(store=store))
+        self.assertEqual(store.item_status("triage-test:default", "e1"), "done")
+        self.assertEqual(store.degraded_items("triage-test:default"), [])
+        self.assertEqual(self.published[-1], ("e1", "llm"))
 
     def test_without_degrade_the_item_parks_and_resumes_after_cooldown(self):
         @step

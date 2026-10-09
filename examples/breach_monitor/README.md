@@ -32,8 +32,8 @@ forced tool call, and its output is validated before it is stored; anything malf
 cd examples/breach_monitor
 docker compose up -d --wait                       # MongoDB + RabbitMQ (management UI: localhost:15672, guest/guest)
 uv venv .venv && uv pip install -r requirements.txt
-export BREACH_MONITOR_CONTACT="you@example.com"   # goes in the User-Agent
-export ANTHROPIC_API_KEY=...                      # your key; nothing here reads or stores it elsewhere
+cp .env.example .env && chmod 600 .env            # then fill in ANTHROPIC_API_KEY and BREACH_MONITOR_CONTACT
+                                                  # (.env is git-ignored; exported variables win over it)
 
 .venv/bin/python pipeline.py doctor --sources-check   # config, services, and every source: spends nothing
 .venv/bin/python pipeline.py run --max-items 10 --budget-usd 0.50
@@ -94,4 +94,8 @@ The `breaches` collection holds the same document: `organization`, `sector`, `re
 * Candidate selection is a keyword filter on titles and summaries, so it misses breaches whose headlines
   do not use common words, and it will pass some irrelevant articles (the LLM then rejects them).
 * One process drives one `breach_monitor.db`. Run it from a scheduler, not as many parallel copies.
-* Wipe everything: `docker compose down -v && rm breach_monitor.db*`.
+* Candidate dedupe is by URL, not by event: two outlets covering the same breach both get published.
+* The checkpoints and the sinks are separate stores. If you wipe MongoDB, wipe the state too, or stitch will
+  (correctly, by its records) say everything is already processed:
+  `docker compose down -v && find . -maxdepth 1 -name 'breach_monitor.db*' -delete`.
+* Measured on the first real run: 8 articles, 12 Haiku 4.5 calls, about $0.07; 4 of 8 were breach reports.
