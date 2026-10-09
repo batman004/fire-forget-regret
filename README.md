@@ -142,6 +142,14 @@ python -m demo triage --events 200 --concurrency 20 --crash-at evt-0100:classify
 python -m demo providers                       # live breaker state of each provider
 ```
 
+## A real-world job: the breach monitor
+
+[examples/breach_monitor/](examples/breach_monitor/) is a single-file indexing pipeline built on stitch:
+public security feeds and APIs, Claude for severity and plain-language analysis with an entity graph,
+MongoDB for storage and RabbitMQ for the downstream queue. It needs its own dependencies and an
+`ANTHROPIC_API_KEY`; stitch itself still needs nothing. When the LLM is out of credits it publishes a
+flagged rule-based result instead of going stale, and `heal` upgrades it later.
+
 ## Memory management for long-running processes
 
 ```bash

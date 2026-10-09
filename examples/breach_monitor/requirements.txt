@@ -1,0 +1,5 @@
+# Only this example needs these. stitch itself needs nothing.
+anthropic>=0.40
+pymongo>=4.6
+pika>=1.3
+selenium>=4.20      # only for --browser
