@@ -1,9 +1,0 @@
-# Temporal dev server (in-memory by default; fine for a demo).
-#   docker compose -f comparisons/temporal_compare/docker-compose.yml pull
-services:
-  temporal:
-    image: temporalio/temporal:latest
-    command: ["server", "start-dev", "--ip", "0.0.0.0"]
-    ports:
-      - "7233:7233"    # gRPC, what workers and clients talk to
-      - "8233:8233"    # web UI: http://localhost:8233
