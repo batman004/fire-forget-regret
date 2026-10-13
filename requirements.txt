@@ -1,1 +1,4 @@
+stitch-durable @ git+ssh://git@github.com/batman004/stitch.git@main
 loguru>=0.7
+pymongo>=4.6
+openserp>=0.2.7
