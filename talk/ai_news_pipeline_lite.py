@@ -18,18 +18,7 @@ from loguru import logger
 from openserp import AsyncOpenSERP, SERPError
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure, PyMongoError
-
-from stitch import (
-    CheckpointStore,
-    CriticalPolicy,
-    PipelineHalted,
-    RetryPolicy,
-    Workflow,
-    WorkflowRecovery,
-    step,
-)
-from talk.talk_alerter import SimulatedAlerter
-from talk.talk_reporter import TalkReporter
+from stitch_lite import heal, run, run_until_halted, step
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -65,14 +54,9 @@ WORKER_COUNT = int(os.environ.get("TALK_WORKERS", "5"))
 ARTICLE_CHARACTERS = 3000
 PAGE_BYTES_LIMIT = 2_000_000
 REPORT_LIST_LIMIT = 20
-RETRY_SECONDS = float(os.environ.get("TALK_RETRY_SECONDS", "1.0"))
-NETWORK_RETRY = RetryPolicy(
-    maximum_attempts=4,
-    base_delay_seconds=RETRY_SECONDS,
-    maximum_delay_seconds=RETRY_SECONDS * 5,
-    retry_on=(OSError, ConnectionFailure),
-)
 CHECKPOINT_FILE = OUTPUT_DIRECTORY / "checkpoints.db"
+ALERTS_FILE = OUTPUT_DIRECTORY / "alerts.jsonl"
+ALERT_CHANNELS = {"email": "oncall@example.com", "slack": "#data-alerts"}
 LABELS = ("breakthrough", "hype")
 SYSTEM_PROMPT = (
     "You judge AI news. A breakthrough is a new capability, result or release that "
@@ -222,7 +206,7 @@ def headline_only_text(article: dict, error: urllib.error.HTTPError) -> str:
     return article["summary"]
 
 
-@step(retry_policy=NETWORK_RETRY)
+@step()
 async def download_article(article: dict) -> str:
     logger.info("[{}] downloading the article", article["id"])
     try:
@@ -288,7 +272,7 @@ def call_ollama(article: dict, text: str) -> dict:
     return parse_verdict(answer["message"]["content"])
 
 
-def quick_verdict(article: dict, text: str, *, cause=None) -> dict:
+def quick_verdict(article: dict, text: str) -> dict:
     return {
         "label": "unknown",
         "reason": article["summary"][:200],
@@ -296,7 +280,7 @@ def quick_verdict(article: dict, text: str, *, cause=None) -> dict:
     }
 
 
-@step(retry_policy=NETWORK_RETRY, degrade=quick_verdict)
+@step(fallback=quick_verdict)
 async def analyse_with_ollama(article: dict, text: str) -> dict:
     logger.info("[{}] asking {}", article["id"], MODEL)
     verdict = await asyncio.to_thread(call_ollama, article, text)
@@ -314,16 +298,14 @@ def mongo_is_healthy() -> bool:
     return True
 
 
-@step(
-    retry_policy=NETWORK_RETRY, critical=CriticalPolicy(health_check=mongo_is_healthy)
-)
+@step(critical=mongo_is_healthy, retry_on=(OSError, ConnectionFailure))
 async def store_in_mongo(article: dict, verdict: dict) -> None:
     logger.info("[{}] storing the verdict in mongo", article["id"])
     await asyncio.to_thread(upsert_verdict, article, verdict)
     logger.success("[{}] stored in mongo", article["id"])
 
 
-@step
+@step()
 async def publish_result(article: dict, verdict: dict) -> None:
     logger.info("[{}] publishing the result", article["id"])
     record = {"id": article["id"], "title": article["title"], **verdict}
@@ -340,42 +322,28 @@ async def process_article(article: dict) -> None:
     await publish_result(article, verdict)
 
 
-def build_workflow() -> Workflow:
-    return Workflow(
-        process_article, name="ai-news-demo", key_function=lambda article: article["id"]
-    )
+def send_alert(kind: str, message: str) -> None:
+    severity = "critical" if kind == "halted" else "recovered"
+    for channel, destination in ALERT_CHANNELS.items():
+        log = logger.critical if severity == "critical" else logger.success
+        log("ALERT via {} to {}: {}", channel, destination, message)
+        entry = {"channel": channel, "to": destination, "severity": severity, "title": message}
+        with ALERTS_FILE.open("a") as alerts_file:
+            alerts_file.write(json.dumps(entry) + "\n")
 
 
 async def run_pipeline() -> None:
     logger.info("process id {}  (kill -9 it whenever you like)", os.getpid())
     OUTPUT_DIRECTORY.mkdir(exist_ok=True)
-    store = CheckpointStore(CHECKPOINT_FILE)
-    statistics = await build_workflow().run_many(
-        stream_news(),
-        store,
-        concurrency=WORKER_COUNT,
-        reporter=TalkReporter(),
-        alerter=SimulatedAlerter(),
+    await run(
+        process_article, stream_news(), CHECKPOINT_FILE, workers=WORKER_COUNT, alert=send_alert
     )
-    logger.success(
-        "finished: {} done, {} skipped, {} stopped, {} used the fallback",
-        statistics.items_done,
-        statistics.items_skipped,
-        statistics.items_failed,
-        statistics.items_degraded,
-    )
+    logger.success("finished")
 
 
 async def heal_pipeline() -> None:
-    store = CheckpointStore(CHECKPOINT_FILE)
-    build_workflow()
-    outcomes = await WorkflowRecovery(store).heal(
-        concurrency=WORKER_COUNT, reporter=TalkReporter(), alerter=SimulatedAlerter()
-    )
-    if outcomes:
-        logger.success("healed")
-    else:
-        logger.info("nothing to heal")
+    await heal(process_article, CHECKPOINT_FILE, workers=WORKER_COUNT, alert=send_alert)
+    logger.success("healed")
 
 
 def read_lines(path: Path) -> list[str]:
@@ -434,14 +402,6 @@ def reset_output() -> None:
     logger.info("output cleared")
 
 
-def run_until_halted(coroutine) -> None:
-    try:
-        asyncio.run(coroutine)
-    except PipelineHalted as halted:
-        logger.critical("pipeline halted: {}", halted)
-        sys.exit(2)
-
-
 def main() -> None:
     load_environment_file()
     command = sys.argv[1] if len(sys.argv) > 1 else "run"
@@ -454,7 +414,7 @@ def main() -> None:
     elif command == "reset":
         reset_output()
     else:
-        print("usage: python -m talk.ai_news_pipeline [run|heal|report|reset]")
+        print("usage: python -m talk.ai_news_pipeline_lite [run|heal|report|reset]")
 
 
 if __name__ == "__main__":

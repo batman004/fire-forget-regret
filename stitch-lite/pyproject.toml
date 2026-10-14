@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stitch-lite"
+version = "0.1.0"
+description = "A tiny durable-execution core: checkpoints, retries, fallbacks and critical steps in one standard-library file"
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.setuptools]
+py-modules = ["stitch_lite"]

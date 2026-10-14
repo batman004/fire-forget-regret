@@ -1,0 +1,5 @@
+2026-10-14 18:42:56.986 | INFO     | __main__:main:86 - cooldown proxy on port 11435 in front of http://localhost:11434: 8.0s pause after every 2 requests
+2026-10-14 18:43:00.171 | WARNING  | __main__:admit:38 - served 2 requests, cooling down for 8s
+2026-10-14 18:43:08.236 | WARNING  | __main__:admit:38 - served 4 requests, cooling down for 8s
+2026-10-14 18:43:16.909 | WARNING  | __main__:admit:38 - served 6 requests, cooling down for 8s
+2026-10-14 18:43:25.174 | WARNING  | __main__:admit:38 - served 8 requests, cooling down for 8s

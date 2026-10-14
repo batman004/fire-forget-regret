@@ -13,14 +13,13 @@ from unittest import mock
 
 from openserp import SERPError
 from pymongo.errors import ConnectionFailure
-from stitch import PipelineHalted
+from stitch_lite import Halted
 
-os.environ["TALK_RETRY_SECONDS"] = "0.001"
+os.environ["STITCH_BACKOFF"] = "0.001"
 
 try:
     from talk import ai_news_pipeline as plain_pipeline
-    from talk import talk_alerter
-    from talk import ai_news_pipeline_durable as durable_pipeline
+    from talk import ai_news_pipeline_lite as lite_pipeline
 except ImportError as error:
     raise unittest.SkipTest(f"needs the demo dependencies: {error}")
 
@@ -135,11 +134,12 @@ class TalkPipelineTestCase(unittest.TestCase):
             mock.patch.object(self.module, "MODEL_CALLS_FILE", output / "model_calls.log"),
             mock.patch.object(self.module, "mongo_collection", return_value=self.collection),
             mock.patch.object(self.module, "WORKER_COUNT", 1),
-            mock.patch.object(talk_alerter, "ALERTS_FILE", output / "alerts.jsonl"),
             mock.patch.object(self.module, "search_news", self.internet.search),
             mock.patch.object(self.module, "EMPTY_ROUND_PAUSE_SECONDS", 0.001),
             mock.patch.object(self.module, "ARTICLES_LIMIT", ARTICLE_COUNT),
         ]
+        if hasattr(self.module, "ALERTS_FILE"):
+            self.patches.append(mock.patch.object(self.module, "ALERTS_FILE", output / "alerts.jsonl"))
         if hasattr(self.module, "CHECKPOINT_FILE"):
             self.patches.append(mock.patch.object(self.module, "CHECKPOINT_FILE", output / "checkpoints.db"))
         for patch in self.patches:
@@ -186,8 +186,8 @@ class PlainPipelineTest(TalkPipelineTestCase):
         self.assertEqual(len(self.collection.documents), ARTICLE_COUNT)
 
 
-class DurablePipelineTest(TalkPipelineTestCase):
-    module = durable_pipeline
+class LitePipelineTest(TalkPipelineTestCase):
+    module = lite_pipeline
 
     def test_a_crash_resumes_without_repeating_work_or_duplicating(self):
         self.internet.kill_on_model_call = 3
@@ -243,14 +243,14 @@ class DurablePipelineTest(TalkPipelineTestCase):
         self.assertEqual({document.get("source") for document in self.collection.documents.values()}, {None})
 
     def alerts(self) -> list[dict]:
-        return [json.loads(line) for line in self.module.read_lines(talk_alerter.ALERTS_FILE)]
+        return [json.loads(line) for line in self.module.read_lines(self.module.ALERTS_FILE)]
 
     def test_mongo_staying_down_halts_the_pipeline_alerts_and_resumes_only_when_it_is_back(self):
         self.collection.down = True
-        with self.assertRaises(PipelineHalted):
+        with self.assertRaises(Halted):
             self.run_quietly(self.module.run_pipeline())
         self.assertEqual({(alert["channel"], alert["severity"]) for alert in self.alerts()}, {("email", "critical"), ("slack", "critical")})
-        with self.assertRaises(PipelineHalted):
+        with self.assertRaises(Halted):
             self.run_quietly(self.module.run_pipeline())
         self.assertEqual(len(self.alerts()), 2)
         self.assertEqual(self.published(), [])
@@ -313,8 +313,8 @@ class DurablePipelineTest(TalkPipelineTestCase):
 
     def test_the_two_scripts_differ_only_by_the_durability_lines(self):
         plain = set(Path(plain_pipeline.__file__).read_text().splitlines())
-        durable = set(Path(durable_pipeline.__file__).read_text().splitlines())
-        removed = sorted(line for line in plain - durable if line.strip())
+        lite = set(Path(lite_pipeline.__file__).read_text().splitlines())
+        removed = sorted(line for line in plain - lite if line.strip())
         self.assertEqual(removed, [
             '            await limit.acquire()',
             '            tasks.create_task(process_and_release(article, limit))',
@@ -326,8 +326,7 @@ class DurablePipelineTest(TalkPipelineTestCase):
             '    async with asyncio.TaskGroup() as tasks:',
             '    finally:',
             '    limit = asyncio.Semaphore(WORKER_COUNT)',
-            '    logger.success("finished")',
-            'async def process_and_release(article: dict, limit: asyncio.Semaphore) -> None:',
+                    'async def process_and_release(article: dict, limit: asyncio.Semaphore) -> None:',
             'from pymongo.errors import PyMongoError',
         ])
 

@@ -1,0 +1,91 @@
+$ python -m talk.ai_news_pipeline_lite reset
+2026-10-14 18:41:47.257 | INFO     | __main__:reset_output:402 - output cleared
+[exit code 0]
+
+$ python -m talk.ai_news_pipeline_lite run
+2026-10-14 18:41:47.952 | INFO     | __main__:run_pipeline:336 - process id 63936  (kill -9 it whenever you like)
+2026-10-14 18:41:49,255 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-14 18:41:49.260 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-14 18:41:49.260 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-14 18:41:49.260 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
+2026-10-14 18:41:49.260 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
+2026-10-14 18:41:49.260 | INFO     | __main__:stream_news:173 - found AI Model Release Calendar: Latest AI Model Releases by Date (scriptbyai.com)
+2026-10-14 18:41:49.261 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-14 18:41:49.261 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-14 18:41:49.263 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-14 18:41:49.263 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-14 18:41:49.264 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
+2026-10-14 18:41:49.264 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
+2026-10-14 18:41:49.265 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
+2026-10-14 18:41:49.265 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
+2026-10-14 18:41:49.266 | INFO     | __main__:process_article:318 - [d640495d6a] AI Model Release Calendar: Latest AI Model Releases by Date
+2026-10-14 18:41:49.266 | INFO     | __main__:download_article:211 - [d640495d6a] downloading the article
+2026-10-14 18:41:49.488 | DEBUG    | __main__:download_article:219 - [6f4ef17a36] downloaded 741 characters
+2026-10-14 18:41:49.489 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
+2026-10-14 18:41:49.516 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
+2026-10-14 18:41:49.517 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
+2026-10-14 18:41:49.551 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
+2026-10-14 18:41:49.551 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
+2026-10-14 18:41:49.701 | DEBUG    | __main__:download_article:219 - [d640495d6a] downloaded 3000 characters
+2026-10-14 18:41:49.701 | INFO     | __main__:analyse_with_ollama:285 - [d640495d6a] asking qwen3
+2026-10-14 18:41:49.918 | DEBUG    | __main__:download_article:219 - [d053a35ce7] downloaded 3000 characters
+2026-10-14 18:41:49.919 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
+2026-10-14 18:41:54.619 | SUCCESS  | __main__:analyse_with_ollama:287 - [6f4ef17a36] qwen3 says hype
+2026-10-14 18:41:54.619 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
+2026-10-14 18:41:54.675 | SUCCESS  | __main__:store_in_mongo:305 - [6f4ef17a36] stored in mongo
+2026-10-14 18:41:54.675 | INFO     | __main__:publish_result:310 - [6f4ef17a36] publishing the result
+2026-10-14 18:41:54.675 | SUCCESS  | __main__:publish_result:314 - [6f4ef17a36] published: hype
+2026-10-14 18:42:02.280 | SUCCESS  | __main__:analyse_with_ollama:287 - [4587286d29] qwen3 says hype
+2026-10-14 18:42:02.280 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
+2026-10-14 18:42:02.281 | SUCCESS  | __main__:store_in_mongo:305 - [4587286d29] stored in mongo
+2026-10-14 18:42:02.281 | INFO     | __main__:publish_result:310 - [4587286d29] publishing the result
+2026-10-14 18:42:02.281 | SUCCESS  | __main__:publish_result:314 - [4587286d29] published: hype
+[killed with SIGKILL, pid 63936]
+[exit code -9]
+
+$ python -m talk.ai_news_pipeline_lite run
+2026-10-14 18:42:02.923 | INFO     | __main__:run_pipeline:336 - process id 63979  (kill -9 it whenever you like)
+2026-10-14 18:42:02,947 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-14 18:42:02.948 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-14 18:42:02.948 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-14 18:42:02.948 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
+2026-10-14 18:42:02.948 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
+2026-10-14 18:42:02.948 | INFO     | __main__:stream_news:173 - found AI Model Release Calendar: Latest AI Model Releases by Date (scriptbyai.com)
+2026-10-14 18:42:02.948 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-14 18:42:02.948 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
+2026-10-14 18:42:02,949 | INFO     | [4587286d29] already finished, skipped
+2026-10-14 18:42:02,949 | INFO     | [6f4ef17a36] already finished, skipped
+2026-10-14 18:42:02.949 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
+2026-10-14 18:42:02.949 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
+2026-10-14 18:42:02.949 | INFO     | __main__:process_article:318 - [d640495d6a] AI Model Release Calendar: Latest AI Model Releases by Date
+2026-10-14 18:42:02.949 | INFO     | __main__:analyse_with_ollama:285 - [d640495d6a] asking qwen3
+2026-10-14 18:42:17.579 | SUCCESS  | __main__:analyse_with_ollama:287 - [d053a35ce7] qwen3 says hype
+2026-10-14 18:42:17.579 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
+2026-10-14 18:42:17.583 | SUCCESS  | __main__:store_in_mongo:305 - [d053a35ce7] stored in mongo
+2026-10-14 18:42:17.583 | INFO     | __main__:publish_result:310 - [d053a35ce7] publishing the result
+2026-10-14 18:42:17.583 | SUCCESS  | __main__:publish_result:314 - [d053a35ce7] published: hype
+2026-10-14 18:42:19.543 | SUCCESS  | __main__:analyse_with_ollama:287 - [b8edcb1b3b] qwen3 says hype
+2026-10-14 18:42:19.543 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-14 18:42:19.544 | SUCCESS  | __main__:store_in_mongo:305 - [b8edcb1b3b] stored in mongo
+2026-10-14 18:42:19.544 | INFO     | __main__:publish_result:310 - [b8edcb1b3b] publishing the result
+2026-10-14 18:42:19.544 | SUCCESS  | __main__:publish_result:314 - [b8edcb1b3b] published: hype
+2026-10-14 18:42:24.784 | SUCCESS  | __main__:analyse_with_ollama:287 - [d640495d6a] qwen3 says hype
+2026-10-14 18:42:24.784 | INFO     | __main__:store_in_mongo:303 - [d640495d6a] storing the verdict in mongo
+2026-10-14 18:42:24.785 | SUCCESS  | __main__:store_in_mongo:305 - [d640495d6a] stored in mongo
+2026-10-14 18:42:24.785 | INFO     | __main__:publish_result:310 - [d640495d6a] publishing the result
+2026-10-14 18:42:24.785 | SUCCESS  | __main__:publish_result:314 - [d640495d6a] published: hype
+2026-10-14 18:42:24.785 | SUCCESS  | __main__:run_pipeline:341 - finished
+[exit code 0]
+
+$ python -m talk.ai_news_pipeline_lite report
+  hype          AI Model Release Tracker - evertune.ai
+  hype          AI Model Launch Timeline: Every Major AI Model Announcement
+  hype          AI Model Release Tracker: New AI Models, October 2026 | Oppe
+  hype          AI Model Release Tracker — Evertune
+  hype          AI Model Release Calendar: Latest AI Model Releases by Date
+
+5 messages published, 5 different articles
+0 breakthrough, 5 hype, 0 flagged fallbacks, 0 duplicates
+5 model calls, 5 documents in mongo
+[exit code 0]
+

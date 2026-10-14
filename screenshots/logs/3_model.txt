@@ -1,0 +1,153 @@
+$ python -m talk.ai_news_pipeline_lite reset
+2026-10-14 18:29:31.117 | INFO     | __main__:reset_output:402 - output cleared
+[exit code 0]
+
+$ OLLAMA_URL=http://127.0.0.1:9/api/chat python -m talk.ai_news_pipeline_lite run
+2026-10-14 18:29:31.828 | INFO     | __main__:run_pipeline:336 - process id 62638  (kill -9 it whenever you like)
+2026-10-14 18:29:31,851 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-14 18:29:31.852 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-14 18:29:31.852 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-14 18:29:31.852 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
+2026-10-14 18:29:31.852 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
+2026-10-14 18:29:31.852 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
+2026-10-14 18:29:31.852 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-14 18:29:31.852 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-14 18:29:31.852 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-14 18:29:31.853 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-14 18:29:31.853 | INFO     | __main__:process_article:318 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
+2026-10-14 18:29:31.853 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-14 18:29:31.853 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
+2026-10-14 18:29:31.853 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
+2026-10-14 18:29:31.854 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
+2026-10-14 18:29:31.854 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
+2026-10-14 18:29:32.127 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
+2026-10-14 18:29:32.128 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
+2026-10-14 18:29:32,129 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
+2026-10-14 18:29:32.169 | DEBUG    | __main__:download_article:219 - [6f4ef17a36] downloaded 741 characters
+2026-10-14 18:29:32.169 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
+2026-10-14 18:29:32,170 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
+2026-10-14 18:29:32.185 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
+2026-10-14 18:29:32.185 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
+2026-10-14 18:29:32,186 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
+2026-10-14 18:29:32.286 | DEBUG    | __main__:download_article:219 - [d053a35ce7] downloaded 3000 characters
+2026-10-14 18:29:32.287 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
+2026-10-14 18:29:32,287 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
+2026-10-14 18:29:32.396 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
+2026-10-14 18:29:32,397 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
+2026-10-14 18:29:32.403 | DEBUG    | __main__:download_article:219 - [b46e0e2576] downloaded 3000 characters
+2026-10-14 18:29:32.403 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
+2026-10-14 18:29:32,404 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
+2026-10-14 18:29:32.421 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
+2026-10-14 18:29:32,422 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
+2026-10-14 18:29:32.455 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
+2026-10-14 18:29:32,456 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
+2026-10-14 18:29:32.472 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
+2026-10-14 18:29:32,473 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
+2026-10-14 18:29:32.580 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
+2026-10-14 18:29:32,582 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
+2026-10-14 18:29:32.763 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
+2026-10-14 18:29:32,765 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
+2026-10-14 18:29:32.780 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
+2026-10-14 18:29:32,781 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
+2026-10-14 18:29:32.793 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
+2026-10-14 18:29:32,794 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
+2026-10-14 18:29:32.855 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
+2026-10-14 18:29:32,857 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
+2026-10-14 18:29:33.128 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
+2026-10-14 18:29:33,130 | WARNING  | analyse_with_ollama failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
+2026-10-14 18:29:33.416 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
+2026-10-14 18:29:33.419 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
+2026-10-14 18:29:33.458 | SUCCESS  | __main__:store_in_mongo:305 - [6f4ef17a36] stored in mongo
+2026-10-14 18:29:33.458 | INFO     | __main__:publish_result:310 - [6f4ef17a36] publishing the result
+2026-10-14 18:29:33.459 | SUCCESS  | __main__:publish_result:314 - [6f4ef17a36] published: unknown
+2026-10-14 18:29:33.498 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
+2026-10-14 18:29:33.499 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-14 18:29:33.500 | SUCCESS  | __main__:store_in_mongo:305 - [b8edcb1b3b] stored in mongo
+2026-10-14 18:29:33.501 | INFO     | __main__:publish_result:310 - [b8edcb1b3b] publishing the result
+2026-10-14 18:29:33.501 | SUCCESS  | __main__:publish_result:314 - [b8edcb1b3b] published: unknown
+2026-10-14 18:29:33.888 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
+2026-10-14 18:29:33.891 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
+2026-10-14 18:29:33.892 | SUCCESS  | __main__:store_in_mongo:305 - [d053a35ce7] stored in mongo
+2026-10-14 18:29:33.892 | INFO     | __main__:publish_result:310 - [d053a35ce7] publishing the result
+2026-10-14 18:29:33.893 | SUCCESS  | __main__:publish_result:314 - [d053a35ce7] published: unknown
+2026-10-14 18:29:33.915 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
+2026-10-14 18:29:33.917 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
+2026-10-14 18:29:33.919 | SUCCESS  | __main__:store_in_mongo:305 - [4587286d29] stored in mongo
+2026-10-14 18:29:33.919 | INFO     | __main__:publish_result:310 - [4587286d29] publishing the result
+2026-10-14 18:29:33.919 | SUCCESS  | __main__:publish_result:314 - [4587286d29] published: unknown
+2026-10-14 18:29:34.299 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
+2026-10-14 18:29:34.302 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
+2026-10-14 18:29:34.303 | SUCCESS  | __main__:store_in_mongo:305 - [b46e0e2576] stored in mongo
+2026-10-14 18:29:34.303 | INFO     | __main__:publish_result:310 - [b46e0e2576] publishing the result
+2026-10-14 18:29:34.304 | SUCCESS  | __main__:publish_result:314 - [b46e0e2576] published: unknown
+2026-10-14 18:29:34.304 | SUCCESS  | __main__:run_pipeline:341 - finished
+[exit code 0]
+
+$ python -m talk.ai_news_pipeline_lite report
+  unknown       AI Model Release Tracker - evertune.ai   (fallback)
+  unknown       AI Model Release Tracker — Evertune   (fallback)
+  unknown       AI Model Release Tracker: New AI Models, October 2026 | Oppe   (fallback)
+  unknown       AI Model Launch Timeline: Every Major AI Model Announcement   (fallback)
+  unknown       LLM Updates (October 2026) - AI Model Releases & Provider Ac   (fallback)
+
+5 messages published, 5 different articles
+0 breakthrough, 0 hype, 5 flagged fallbacks, 0 duplicates
+0 model calls, 5 documents in mongo
+[exit code 0]
+
+$ python -m talk.ai_news_pipeline_lite heal
+2026-10-14 18:29:35.376 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-14 18:29:35.376 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
+2026-10-14 18:29:35.377 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
+2026-10-14 18:29:35.377 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
+2026-10-14 18:29:35.377 | INFO     | __main__:process_article:318 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
+2026-10-14 18:29:35.377 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
+2026-10-14 18:29:35.377 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-14 18:29:35.377 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
+2026-10-14 18:29:35.378 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
+2026-10-14 18:29:35.378 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
+2026-10-14 18:29:37.705 | SUCCESS  | __main__:analyse_with_ollama:287 - [4587286d29] qwen3 says hype
+2026-10-14 18:29:37.705 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
+2026-10-14 18:29:37.710 | SUCCESS  | __main__:store_in_mongo:305 - [4587286d29] stored in mongo
+2026-10-14 18:29:37.711 | INFO     | __main__:publish_result:310 - [4587286d29] publishing the result
+2026-10-14 18:29:37.711 | SUCCESS  | __main__:publish_result:314 - [4587286d29] published: hype
+2026-10-14 18:29:39.633 | SUCCESS  | __main__:analyse_with_ollama:287 - [b8edcb1b3b] qwen3 says hype
+2026-10-14 18:29:39.633 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-14 18:29:39.634 | SUCCESS  | __main__:store_in_mongo:305 - [b8edcb1b3b] stored in mongo
+2026-10-14 18:29:39.634 | INFO     | __main__:publish_result:310 - [b8edcb1b3b] publishing the result
+2026-10-14 18:29:39.635 | SUCCESS  | __main__:publish_result:314 - [b8edcb1b3b] published: hype
+2026-10-14 18:29:41.332 | SUCCESS  | __main__:analyse_with_ollama:287 - [6f4ef17a36] qwen3 says hype
+2026-10-14 18:29:41.332 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
+2026-10-14 18:29:41.333 | SUCCESS  | __main__:store_in_mongo:305 - [6f4ef17a36] stored in mongo
+2026-10-14 18:29:41.333 | INFO     | __main__:publish_result:310 - [6f4ef17a36] publishing the result
+2026-10-14 18:29:41.333 | SUCCESS  | __main__:publish_result:314 - [6f4ef17a36] published: hype
+2026-10-14 18:29:43.265 | SUCCESS  | __main__:analyse_with_ollama:287 - [b46e0e2576] qwen3 says hype
+2026-10-14 18:29:43.265 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
+2026-10-14 18:29:43.265 | SUCCESS  | __main__:store_in_mongo:305 - [b46e0e2576] stored in mongo
+2026-10-14 18:29:43.266 | INFO     | __main__:publish_result:310 - [b46e0e2576] publishing the result
+2026-10-14 18:29:43.266 | SUCCESS  | __main__:publish_result:314 - [b46e0e2576] published: hype
+2026-10-14 18:29:45.820 | SUCCESS  | __main__:analyse_with_ollama:287 - [d053a35ce7] qwen3 says hype
+2026-10-14 18:29:45.821 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
+2026-10-14 18:29:45.821 | SUCCESS  | __main__:store_in_mongo:305 - [d053a35ce7] stored in mongo
+2026-10-14 18:29:45.821 | INFO     | __main__:publish_result:310 - [d053a35ce7] publishing the result
+2026-10-14 18:29:45.821 | SUCCESS  | __main__:publish_result:314 - [d053a35ce7] published: hype
+2026-10-14 18:29:45.822 | SUCCESS  | __main__:heal_pipeline:346 - healed
+[exit code 0]
+
+$ python -m talk.ai_news_pipeline_lite report
+  unknown       AI Model Release Tracker - evertune.ai   (fallback, replaced later)
+  unknown       AI Model Release Tracker — Evertune   (fallback, replaced later)
+  unknown       AI Model Release Tracker: New AI Models, October 2026 | Oppe   (fallback, replaced later)
+  unknown       AI Model Launch Timeline: Every Major AI Model Announcement   (fallback, replaced later)
+  unknown       LLM Updates (October 2026) - AI Model Releases & Provider Ac   (fallback, replaced later)
+  hype          AI Model Launch Timeline: Every Major AI Model Announcement
+  hype          AI Model Release Tracker — Evertune
+  hype          AI Model Release Tracker - evertune.ai
+  hype          LLM Updates (October 2026) - AI Model Releases & Provider Ac
+  hype          AI Model Release Tracker: New AI Models, October 2026 | Oppe
+
+10 messages published, 5 different articles
+0 breakthrough, 5 hype, 5 flagged fallbacks, 0 duplicates
+5 model calls, 5 documents in mongo
+[exit code 0]
+

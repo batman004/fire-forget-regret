@@ -11,8 +11,8 @@ from loguru import logger
 
 UPSTREAM_URL = os.environ.get("OLLAMA_UPSTREAM", "http://localhost:11434")
 LISTEN_PORT = int(os.environ.get("TALK_PROXY_PORT", "11435"))
-REQUESTS_PER_COOLDOWN = int(os.environ.get("TALK_COOLDOWN_EVERY", "1000"))
-COOLDOWN_SECONDS = float(os.environ.get("TALK_COOLDOWN_SECONDS", "120"))
+REQUESTS_PER_COOLDOWN = int(os.environ.get("TALK_COOLDOWN_EVERY", "10"))
+COOLDOWN_SECONDS = float(os.environ.get("TALK_COOLDOWN_SECONDS", "10"))
 UPSTREAM_TIMEOUT_SECONDS = 600
 PROGRESS_LOG_INTERVAL = 100
 
