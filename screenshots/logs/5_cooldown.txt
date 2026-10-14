@@ -1,149 +1,149 @@
 $ python -m talk.ai_news_pipeline_lite reset
-2026-10-14 18:42:59.138 | INFO     | __main__:reset_output:402 - output cleared
+2026-10-15 00:23:09.605 | INFO     | __main__:reset_output:416 - output cleared
 [exit code 0]
 
 $ OLLAMA_URL=http://127.0.0.1:11435/api/chat STITCH_BACKOFF=1 TALK_ARTICLES=10 python -m talk.ai_news_pipeline_lite run
-2026-10-14 18:42:59.880 | INFO     | __main__:run_pipeline:336 - process id 64130  (kill -9 it whenever you like)
-2026-10-14 18:42:59,915 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
-2026-10-14 18:42:59.916 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
-2026-10-14 18:42:59.916 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
-2026-10-14 18:42:59.916 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
-2026-10-14 18:42:59.916 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
-2026-10-14 18:42:59.916 | INFO     | __main__:stream_news:173 - found AI Model Release Calendar: Latest AI Model Releases by Date (scriptbyai.com)
-2026-10-14 18:42:59.916 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
-2026-10-14 18:42:59.916 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
-2026-10-14 18:42:59.916 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
-2026-10-14 18:42:59.917 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
-2026-10-14 18:42:59.917 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
-2026-10-14 18:42:59.917 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
-2026-10-14 18:42:59.917 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
-2026-10-14 18:42:59.917 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
-2026-10-14 18:42:59.917 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
-2026-10-14 18:42:59.918 | INFO     | __main__:process_article:318 - [d640495d6a] AI Model Release Calendar: Latest AI Model Releases by Date
-2026-10-14 18:42:59.918 | INFO     | __main__:download_article:211 - [d640495d6a] downloading the article
-2026-10-14 18:43:00.157 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
-2026-10-14 18:43:00.158 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
-2026-10-14 18:43:00.170 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
-2026-10-14 18:43:00.170 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
-2026-10-14 18:43:00.226 | DEBUG    | __main__:download_article:219 - [d640495d6a] downloaded 3000 characters
-2026-10-14 18:43:00.226 | INFO     | __main__:analyse_with_ollama:285 - [d640495d6a] asking qwen3
-2026-10-14 18:43:00,227 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 2/4
-2026-10-14 18:43:00.234 | DEBUG    | __main__:download_article:219 - [6f4ef17a36] downloaded 741 characters
-2026-10-14 18:43:00.234 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
-2026-10-14 18:43:00,234 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 2/4
-2026-10-14 18:43:00.350 | DEBUG    | __main__:download_article:219 - [d053a35ce7] downloaded 3000 characters
-2026-10-14 18:43:00.351 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
-2026-10-14 18:43:00,352 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 2/4
-2026-10-14 18:43:02.529 | SUCCESS  | __main__:analyse_with_ollama:287 - [4587286d29] qwen3 says hype
-2026-10-14 18:43:02.529 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
-2026-10-14 18:43:02.572 | SUCCESS  | __main__:store_in_mongo:305 - [4587286d29] stored in mongo
-2026-10-14 18:43:02.572 | INFO     | __main__:publish_result:310 - [4587286d29] publishing the result
-2026-10-14 18:43:02.572 | SUCCESS  | __main__:publish_result:314 - [4587286d29] published: hype
-2026-10-14 18:43:02.572 | INFO     | __main__:stream_news:173 - found AI Model Releases Timeline: Latest Launches, Updated Daily (promptzone.com)
-2026-10-14 18:43:02.572 | INFO     | __main__:process_article:318 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
-2026-10-14 18:43:02.572 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
-2026-10-14 18:43:03.166 | DEBUG    | __main__:download_article:219 - [b46e0e2576] downloaded 3000 characters
-2026-10-14 18:43:03.167 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
-2026-10-14 18:43:03,168 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 2/4
-2026-10-14 18:43:04.516 | SUCCESS  | __main__:analyse_with_ollama:287 - [b8edcb1b3b] qwen3 says hype
-2026-10-14 18:43:04.517 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
-2026-10-14 18:43:04.518 | SUCCESS  | __main__:store_in_mongo:305 - [b8edcb1b3b] stored in mongo
-2026-10-14 18:43:04.518 | INFO     | __main__:publish_result:310 - [b8edcb1b3b] publishing the result
-2026-10-14 18:43:04.519 | SUCCESS  | __main__:publish_result:314 - [b8edcb1b3b] published: hype
-2026-10-14 18:43:04.519 | INFO     | __main__:stream_news:173 - found Release Radar: the latest AI model releases | AI HQ (ai-hq.tech)
-2026-10-14 18:43:04.519 | INFO     | __main__:process_article:318 - [f586745d69] AI Model Releases Timeline: Latest Launches, Updated Daily
-2026-10-14 18:43:04.519 | INFO     | __main__:download_article:211 - [f586745d69] downloading the article
-2026-10-14 18:43:04.903 | DEBUG    | __main__:download_article:219 - [f586745d69] downloaded 3000 characters
-2026-10-14 18:43:04.903 | INFO     | __main__:analyse_with_ollama:285 - [f586745d69] asking qwen3
-2026-10-14 18:43:04,905 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 2/4
-2026-10-14 18:43:08.229 | INFO     | __main__:analyse_with_ollama:285 - [d640495d6a] asking qwen3
-2026-10-14 18:43:08.235 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
-2026-10-14 18:43:08.352 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
-2026-10-14 18:43:08,353 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 3/4
-2026-10-14 18:43:08.906 | INFO     | __main__:analyse_with_ollama:285 - [f586745d69] asking qwen3
-2026-10-14 18:43:08,907 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 3/4
-2026-10-14 18:43:09.169 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
-2026-10-14 18:43:09,170 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 3/4
-2026-10-14 18:43:10.131 | SUCCESS  | __main__:analyse_with_ollama:287 - [d640495d6a] qwen3 says hype
-2026-10-14 18:43:10.131 | INFO     | __main__:store_in_mongo:303 - [d640495d6a] storing the verdict in mongo
-2026-10-14 18:43:10.131 | SUCCESS  | __main__:store_in_mongo:305 - [d640495d6a] stored in mongo
-2026-10-14 18:43:10.132 | INFO     | __main__:publish_result:310 - [d640495d6a] publishing the result
-2026-10-14 18:43:10.132 | SUCCESS  | __main__:publish_result:314 - [d640495d6a] published: hype
-2026-10-14 18:43:10.132 | INFO     | __main__:stream_news:173 - found New AI Models: Live Release Tracker (Last 24 Hours) | BenchL (benchlm.ai)
-2026-10-14 18:43:10.132 | INFO     | __main__:process_article:318 - [bd0734d590] Release Radar: the latest AI model releases | AI HQ
-2026-10-14 18:43:10.132 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
-2026-10-14 18:43:10,319 | WARNING  | download_article failed (HTTP Error 429: Too Many Requests), retry 2/4
-2026-10-14 18:43:11.064 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
-2026-10-14 18:43:11,155 | WARNING  | download_article failed (HTTP Error 429: Too Many Requests), retry 3/4
-2026-10-14 18:43:11.830 | SUCCESS  | __main__:analyse_with_ollama:287 - [6f4ef17a36] qwen3 says hype
-2026-10-14 18:43:11.830 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
-2026-10-14 18:43:11.830 | SUCCESS  | __main__:store_in_mongo:305 - [6f4ef17a36] stored in mongo
-2026-10-14 18:43:11.831 | INFO     | __main__:publish_result:310 - [6f4ef17a36] publishing the result
-2026-10-14 18:43:11.831 | SUCCESS  | __main__:publish_result:314 - [6f4ef17a36] published: hype
-2026-10-14 18:43:11.831 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: Every Confirmed 2026 Date (aitoolsrecap.com)
-2026-10-14 18:43:11.831 | INFO     | __main__:process_article:318 - [d61bcb3125] New AI Models: Live Release Tracker (Last 24 Hours) | BenchLM
-2026-10-14 18:43:11.831 | INFO     | __main__:download_article:211 - [d61bcb3125] downloading the article
-2026-10-14 18:43:12.813 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
-2026-10-14 18:43:12,906 | WARNING  | download_article failed (HTTP Error 429: Too Many Requests), retry 4/4
-2026-10-14 18:43:13.199 | DEBUG    | __main__:download_article:219 - [d61bcb3125] downloaded 3000 characters
-2026-10-14 18:43:13.199 | INFO     | __main__:analyse_with_ollama:285 - [d61bcb3125] asking qwen3
-2026-10-14 18:43:13,201 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 2/4
-2026-10-14 18:43:15.878 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
-2026-10-14 18:43:15,972 | ERROR    | [bd0734d590] stopped: HTTP Error 429: Too Many Requests. Run again to continue.
-2026-10-14 18:43:15.973 | INFO     | __main__:process_article:318 - [47fab9247c] AI Model Release Tracker: Every Confirmed 2026 Date
-2026-10-14 18:43:15.973 | INFO     | __main__:download_article:211 - [47fab9247c] downloading the article
-2026-10-14 18:43:16.354 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
-2026-10-14 18:43:16.908 | INFO     | __main__:analyse_with_ollama:285 - [f586745d69] asking qwen3
-2026-10-14 18:43:17.113 | DEBUG    | __main__:download_article:219 - [47fab9247c] downloaded 3000 characters
-2026-10-14 18:43:17.113 | INFO     | __main__:analyse_with_ollama:285 - [47fab9247c] asking qwen3
-2026-10-14 18:43:17,114 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 2/4
-2026-10-14 18:43:17.171 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
-2026-10-14 18:43:17,172 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 4/4
-2026-10-14 18:43:17.202 | INFO     | __main__:analyse_with_ollama:285 - [d61bcb3125] asking qwen3
-2026-10-14 18:43:17,203 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 3/4
-2026-10-14 18:43:19.035 | SUCCESS  | __main__:analyse_with_ollama:287 - [d053a35ce7] qwen3 says hype
-2026-10-14 18:43:19.035 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
-2026-10-14 18:43:19.036 | SUCCESS  | __main__:store_in_mongo:305 - [d053a35ce7] stored in mongo
-2026-10-14 18:43:19.036 | INFO     | __main__:publish_result:310 - [d053a35ce7] publishing the result
-2026-10-14 18:43:19.036 | SUCCESS  | __main__:publish_result:314 - [d053a35ce7] published: hype
-2026-10-14 18:43:25.116 | INFO     | __main__:analyse_with_ollama:285 - [47fab9247c] asking qwen3
-2026-10-14 18:43:25.174 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
-2026-10-14 18:43:25.204 | INFO     | __main__:analyse_with_ollama:285 - [d61bcb3125] asking qwen3
-2026-10-14 18:43:25,205 | WARNING  | analyse_with_ollama failed (the model server refused the request: HTTP 429), retry 4/4
-2026-10-14 18:43:26.615 | SUCCESS  | __main__:analyse_with_ollama:287 - [f586745d69] qwen3 says hype
-2026-10-14 18:43:26.615 | INFO     | __main__:store_in_mongo:303 - [f586745d69] storing the verdict in mongo
-2026-10-14 18:43:26.616 | SUCCESS  | __main__:store_in_mongo:305 - [f586745d69] stored in mongo
-2026-10-14 18:43:26.616 | INFO     | __main__:publish_result:310 - [f586745d69] publishing the result
-2026-10-14 18:43:26.616 | SUCCESS  | __main__:publish_result:314 - [f586745d69] published: hype
-2026-10-14 18:43:33.207 | INFO     | __main__:analyse_with_ollama:285 - [d61bcb3125] asking qwen3
-2026-10-14 18:43:33.355 | SUCCESS  | __main__:analyse_with_ollama:287 - [47fab9247c] qwen3 says hype
-2026-10-14 18:43:33.356 | INFO     | __main__:store_in_mongo:303 - [47fab9247c] storing the verdict in mongo
-2026-10-14 18:43:33.356 | SUCCESS  | __main__:store_in_mongo:305 - [47fab9247c] stored in mongo
-2026-10-14 18:43:33.356 | INFO     | __main__:publish_result:310 - [47fab9247c] publishing the result
-2026-10-14 18:43:33.357 | SUCCESS  | __main__:publish_result:314 - [47fab9247c] published: hype
-2026-10-14 18:43:39.938 | SUCCESS  | __main__:analyse_with_ollama:287 - [b46e0e2576] qwen3 says hype
-2026-10-14 18:43:39.938 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
-2026-10-14 18:43:39.939 | SUCCESS  | __main__:store_in_mongo:305 - [b46e0e2576] stored in mongo
-2026-10-14 18:43:39.939 | INFO     | __main__:publish_result:310 - [b46e0e2576] publishing the result
-2026-10-14 18:43:39.939 | SUCCESS  | __main__:publish_result:314 - [b46e0e2576] published: hype
-2026-10-14 18:43:46.632 | SUCCESS  | __main__:analyse_with_ollama:287 - [d61bcb3125] qwen3 says hype
-2026-10-14 18:43:46.632 | INFO     | __main__:store_in_mongo:303 - [d61bcb3125] storing the verdict in mongo
-2026-10-14 18:43:46.633 | SUCCESS  | __main__:store_in_mongo:305 - [d61bcb3125] stored in mongo
-2026-10-14 18:43:46.633 | INFO     | __main__:publish_result:310 - [d61bcb3125] publishing the result
-2026-10-14 18:43:46.633 | SUCCESS  | __main__:publish_result:314 - [d61bcb3125] published: hype
-2026-10-14 18:43:46.634 | SUCCESS  | __main__:run_pipeline:341 - finished
+2026-10-15 00:23:10.354 | INFO     | __main__:run_pipeline:350 - process id 84030  (kill -9 it whenever you like)
+2026-10-15 00:23:10,377 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-15 00:23:10.378 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-15 00:23:10.378 | INFO     | __main__:stream_news:173 - found AI Model Release Timeline — What Shipped When | Tech Times (techtimes.com)
+2026-10-15 00:23:10.378 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-15 00:23:10.378 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
+2026-10-15 00:23:10.378 | INFO     | __main__:stream_news:173 - found OpenAI announces 'dots' agent after scrapping launch of new  (theguardian.com)
+2026-10-15 00:23:10.378 | INFO     | __main__:stream_news:173 - found Release Radar: the latest AI model releases | AI HQ (ai-hq.tech)
+2026-10-15 00:23:10.378 | INFO     | __main__:process_article:332 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-15 00:23:10.378 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-15 00:23:10.378 | INFO     | __main__:process_article:332 - [f78059ec2a] AI Model Release Timeline — What Shipped When | Tech Times
+2026-10-15 00:23:10.379 | INFO     | __main__:download_article:211 - [f78059ec2a] downloading the article
+2026-10-15 00:23:10.379 | INFO     | __main__:process_article:332 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-15 00:23:10.379 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-15 00:23:10.379 | INFO     | __main__:process_article:332 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
+2026-10-15 00:23:10.379 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-15 00:23:10.380 | INFO     | __main__:process_article:332 - [007dd370ab] OpenAI announces 'dots' agent after scrapping launch of new AI model .
+2026-10-15 00:23:10.380 | INFO     | __main__:download_article:211 - [007dd370ab] downloading the article
+2026-10-15 00:23:10.555 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
+2026-10-15 00:23:10.556 | INFO     | __main__:analyse_with_ollama:299 - [4587286d29] asking qwen3
+2026-10-15 00:23:10.648 | DEBUG    | __main__:download_article:219 - [f78059ec2a] downloaded 2449 characters
+2026-10-15 00:23:10.649 | INFO     | __main__:analyse_with_ollama:299 - [f78059ec2a] asking qwen3
+2026-10-15 00:23:10.687 | DEBUG    | __main__:download_article:219 - [007dd370ab] downloaded 3000 characters
+2026-10-15 00:23:10.687 | INFO     | __main__:analyse_with_ollama:299 - [007dd370ab] asking qwen3
+2026-10-15 00:23:10,688 | WARNING  | [007dd370ab] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 2/4
+2026-10-15 00:23:10.923 | DEBUG    | __main__:download_article:219 - [b46e0e2576] downloaded 3000 characters
+2026-10-15 00:23:10.923 | INFO     | __main__:analyse_with_ollama:299 - [b46e0e2576] asking qwen3
+2026-10-15 00:23:10,925 | WARNING  | [b46e0e2576] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 2/4
+2026-10-15 00:23:10.961 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
+2026-10-15 00:23:10.961 | INFO     | __main__:analyse_with_ollama:299 - [b8edcb1b3b] asking qwen3
+2026-10-15 00:23:10,962 | WARNING  | [b8edcb1b3b] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 2/4
+2026-10-15 00:23:13.015 | SUCCESS  | __main__:analyse_with_ollama:301 - [4587286d29] qwen3 says hype
+2026-10-15 00:23:13.015 | INFO     | __main__:store_in_mongo:317 - [4587286d29] storing the verdict in mongo
+2026-10-15 00:23:13.043 | SUCCESS  | __main__:store_in_mongo:319 - [4587286d29] stored in mongo
+2026-10-15 00:23:13.043 | INFO     | __main__:publish_result:324 - [4587286d29] publishing the result
+2026-10-15 00:23:13.044 | SUCCESS  | __main__:publish_result:328 - [4587286d29] published: hype
+2026-10-15 00:23:13.044 | INFO     | __main__:stream_news:173 - found AI Model Releases Timeline: Latest Launches, Updated Daily (promptzone.com)
+2026-10-15 00:23:13.044 | INFO     | __main__:process_article:332 - [bd0734d590] Release Radar: the latest AI model releases | AI HQ
+2026-10-15 00:23:13.044 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
+2026-10-15 00:23:13,170 | WARNING  | [bd0734d590] download_article failed (HTTP Error 429: Too Many Requests), waiting 0.7s, retry 2/4
+2026-10-15 00:23:13.824 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
+2026-10-15 00:23:13,923 | WARNING  | [bd0734d590] download_article failed (HTTP Error 429: Too Many Requests), waiting 1.9s, retry 3/4
+2026-10-15 00:23:15.221 | SUCCESS  | __main__:analyse_with_ollama:301 - [f78059ec2a] qwen3 says hype
+2026-10-15 00:23:15.221 | INFO     | __main__:store_in_mongo:317 - [f78059ec2a] storing the verdict in mongo
+2026-10-15 00:23:15.222 | SUCCESS  | __main__:store_in_mongo:319 - [f78059ec2a] stored in mongo
+2026-10-15 00:23:15.222 | INFO     | __main__:publish_result:324 - [f78059ec2a] publishing the result
+2026-10-15 00:23:15.222 | SUCCESS  | __main__:publish_result:328 - [f78059ec2a] published: hype
+2026-10-15 00:23:15.222 | INFO     | __main__:stream_news:173 - found New AI Models: Live Release Tracker (Last 24 Hours) | BenchL (benchlm.ai)
+2026-10-15 00:23:15.222 | INFO     | __main__:process_article:332 - [f586745d69] AI Model Releases Timeline: Latest Launches, Updated Daily
+2026-10-15 00:23:15.222 | INFO     | __main__:download_article:211 - [f586745d69] downloading the article
+2026-10-15 00:23:15.326 | DEBUG    | __main__:download_article:219 - [f586745d69] downloaded 3000 characters
+2026-10-15 00:23:15.326 | INFO     | __main__:analyse_with_ollama:299 - [f586745d69] asking qwen3
+2026-10-15 00:23:15,328 | WARNING  | [f586745d69] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 4s), waiting 4.0s, retry 2/4
+2026-10-15 00:23:15.804 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
+2026-10-15 00:23:15,903 | WARNING  | [bd0734d590] download_article failed (HTTP Error 429: Too Many Requests), waiting 3.6s, retry 4/4
+2026-10-15 00:23:18.689 | INFO     | __main__:analyse_with_ollama:299 - [007dd370ab] asking qwen3
+2026-10-15 00:23:18.925 | INFO     | __main__:analyse_with_ollama:299 - [b46e0e2576] asking qwen3
+2026-10-15 00:23:18.964 | INFO     | __main__:analyse_with_ollama:299 - [b8edcb1b3b] asking qwen3
+2026-10-15 00:23:18,965 | WARNING  | [b8edcb1b3b] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 3/4
+2026-10-15 00:23:19.330 | INFO     | __main__:analyse_with_ollama:299 - [f586745d69] asking qwen3
+2026-10-15 00:23:19,331 | WARNING  | [f586745d69] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 3/4
+2026-10-15 00:23:19.490 | INFO     | __main__:download_article:211 - [bd0734d590] downloading the article
+2026-10-15 00:23:19,584 | ERROR    | [bd0734d590] stopped: HTTP Error 429: Too Many Requests. Run again to continue.
+2026-10-15 00:23:19.584 | INFO     | __main__:stream_news:173 - found OpenAI hails 'new era of artificial general intelligence' wi (theguardian.com)
+2026-10-15 00:23:19.584 | INFO     | __main__:process_article:332 - [d61bcb3125] New AI Models: Live Release Tracker (Last 24 Hours) | BenchLM
+2026-10-15 00:23:19.585 | INFO     | __main__:download_article:211 - [d61bcb3125] downloading the article
+2026-10-15 00:23:20.342 | DEBUG    | __main__:download_article:219 - [d61bcb3125] downloaded 3000 characters
+2026-10-15 00:23:20.343 | INFO     | __main__:analyse_with_ollama:299 - [d61bcb3125] asking qwen3
+2026-10-15 00:23:20,344 | WARNING  | [d61bcb3125] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 7s), waiting 7.0s, retry 2/4
+2026-10-15 00:23:20.737 | SUCCESS  | __main__:analyse_with_ollama:301 - [007dd370ab] qwen3 says hype
+2026-10-15 00:23:20.737 | INFO     | __main__:store_in_mongo:317 - [007dd370ab] storing the verdict in mongo
+2026-10-15 00:23:20.737 | SUCCESS  | __main__:store_in_mongo:319 - [007dd370ab] stored in mongo
+2026-10-15 00:23:20.738 | INFO     | __main__:publish_result:324 - [007dd370ab] publishing the result
+2026-10-15 00:23:20.738 | SUCCESS  | __main__:publish_result:328 - [007dd370ab] published: hype
+2026-10-15 00:23:20.738 | INFO     | __main__:stream_news:173 - found The latest AI news we announced in September 2026 (blog.google)
+2026-10-15 00:23:20.738 | INFO     | __main__:process_article:332 - [8b72a35e05] OpenAI hails 'new era of artificial general intelligence' with Astra .
+2026-10-15 00:23:20.738 | INFO     | __main__:download_article:211 - [8b72a35e05] downloading the article
+2026-10-15 00:23:21.034 | DEBUG    | __main__:download_article:219 - [8b72a35e05] downloaded 3000 characters
+2026-10-15 00:23:21.035 | INFO     | __main__:analyse_with_ollama:299 - [8b72a35e05] asking qwen3
+2026-10-15 00:23:21,036 | WARNING  | [8b72a35e05] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 6s), waiting 6.0s, retry 2/4
+2026-10-15 00:23:23.133 | SUCCESS  | __main__:analyse_with_ollama:301 - [b46e0e2576] qwen3 says hype
+2026-10-15 00:23:23.133 | INFO     | __main__:store_in_mongo:317 - [b46e0e2576] storing the verdict in mongo
+2026-10-15 00:23:23.134 | SUCCESS  | __main__:store_in_mongo:319 - [b46e0e2576] stored in mongo
+2026-10-15 00:23:23.134 | INFO     | __main__:publish_result:324 - [b46e0e2576] publishing the result
+2026-10-15 00:23:23.134 | SUCCESS  | __main__:publish_result:328 - [b46e0e2576] published: hype
+2026-10-15 00:23:23.134 | INFO     | __main__:process_article:332 - [d26cbd1795] The latest AI news we announced in September 2026
+2026-10-15 00:23:23.134 | INFO     | __main__:download_article:211 - [d26cbd1795] downloading the article
+2026-10-15 00:23:25.415 | DEBUG    | __main__:download_article:219 - [d26cbd1795] downloaded 3000 characters
+2026-10-15 00:23:25.416 | INFO     | __main__:analyse_with_ollama:299 - [d26cbd1795] asking qwen3
+2026-10-15 00:23:25,418 | WARNING  | [d26cbd1795] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 2s), waiting 2.0s, retry 2/4
+2026-10-15 00:23:26.966 | INFO     | __main__:analyse_with_ollama:299 - [b8edcb1b3b] asking qwen3
+2026-10-15 00:23:27.037 | INFO     | __main__:analyse_with_ollama:299 - [8b72a35e05] asking qwen3
+2026-10-15 00:23:27.332 | INFO     | __main__:analyse_with_ollama:299 - [f586745d69] asking qwen3
+2026-10-15 00:23:27,333 | WARNING  | [f586745d69] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 4/4
+2026-10-15 00:23:27.345 | INFO     | __main__:analyse_with_ollama:299 - [d61bcb3125] asking qwen3
+2026-10-15 00:23:27,346 | WARNING  | [d61bcb3125] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 3/4
+2026-10-15 00:23:27.420 | INFO     | __main__:analyse_with_ollama:299 - [d26cbd1795] asking qwen3
+2026-10-15 00:23:27,420 | WARNING  | [d26cbd1795] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 3/4
+2026-10-15 00:23:29.091 | SUCCESS  | __main__:analyse_with_ollama:301 - [b8edcb1b3b] qwen3 says hype
+2026-10-15 00:23:29.091 | INFO     | __main__:store_in_mongo:317 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-15 00:23:29.092 | SUCCESS  | __main__:store_in_mongo:319 - [b8edcb1b3b] stored in mongo
+2026-10-15 00:23:29.092 | INFO     | __main__:publish_result:324 - [b8edcb1b3b] publishing the result
+2026-10-15 00:23:29.092 | SUCCESS  | __main__:publish_result:328 - [b8edcb1b3b] published: hype
+2026-10-15 00:23:35.242 | SUCCESS  | __main__:analyse_with_ollama:301 - [8b72a35e05] qwen3 says hype
+2026-10-15 00:23:35.242 | INFO     | __main__:store_in_mongo:317 - [8b72a35e05] storing the verdict in mongo
+2026-10-15 00:23:35.243 | SUCCESS  | __main__:store_in_mongo:319 - [8b72a35e05] stored in mongo
+2026-10-15 00:23:35.243 | INFO     | __main__:publish_result:324 - [8b72a35e05] publishing the result
+2026-10-15 00:23:35.243 | SUCCESS  | __main__:publish_result:328 - [8b72a35e05] published: hype
+2026-10-15 00:23:35.335 | INFO     | __main__:analyse_with_ollama:299 - [f586745d69] asking qwen3
+2026-10-15 00:23:35.347 | INFO     | __main__:analyse_with_ollama:299 - [d61bcb3125] asking qwen3
+2026-10-15 00:23:35.421 | INFO     | __main__:analyse_with_ollama:299 - [d26cbd1795] asking qwen3
+2026-10-15 00:23:35,422 | WARNING  | [d26cbd1795] analyse_with_ollama failed (the model server refused the request: HTTP 429, cooling down, Retry-After 8s), waiting 8.0s, retry 4/4
+2026-10-15 00:23:43.424 | INFO     | __main__:analyse_with_ollama:299 - [d26cbd1795] asking qwen3
+2026-10-15 00:23:44.109 | SUCCESS  | __main__:analyse_with_ollama:301 - [f586745d69] qwen3 says hype
+2026-10-15 00:23:44.109 | INFO     | __main__:store_in_mongo:317 - [f586745d69] storing the verdict in mongo
+2026-10-15 00:23:44.110 | SUCCESS  | __main__:store_in_mongo:319 - [f586745d69] stored in mongo
+2026-10-15 00:23:44.110 | INFO     | __main__:publish_result:324 - [f586745d69] publishing the result
+2026-10-15 00:23:44.110 | SUCCESS  | __main__:publish_result:328 - [f586745d69] published: hype
+2026-10-15 00:23:51.585 | SUCCESS  | __main__:analyse_with_ollama:301 - [d61bcb3125] qwen3 says hype
+2026-10-15 00:23:51.585 | INFO     | __main__:store_in_mongo:317 - [d61bcb3125] storing the verdict in mongo
+2026-10-15 00:23:51.586 | SUCCESS  | __main__:store_in_mongo:319 - [d61bcb3125] stored in mongo
+2026-10-15 00:23:51.586 | INFO     | __main__:publish_result:324 - [d61bcb3125] publishing the result
+2026-10-15 00:23:51.586 | SUCCESS  | __main__:publish_result:328 - [d61bcb3125] published: hype
+2026-10-15 00:23:58.843 | SUCCESS  | __main__:analyse_with_ollama:301 - [d26cbd1795] qwen3 says hype
+2026-10-15 00:23:58.843 | INFO     | __main__:store_in_mongo:317 - [d26cbd1795] storing the verdict in mongo
+2026-10-15 00:23:58.844 | SUCCESS  | __main__:store_in_mongo:319 - [d26cbd1795] stored in mongo
+2026-10-15 00:23:58.844 | INFO     | __main__:publish_result:324 - [d26cbd1795] publishing the result
+2026-10-15 00:23:58.844 | SUCCESS  | __main__:publish_result:328 - [d26cbd1795] published: hype
+2026-10-15 00:23:58.844 | SUCCESS  | __main__:run_pipeline:355 - finished
 [exit code 0]
 
 $ python -m talk.ai_news_pipeline_lite report
   hype          AI Model Launch Timeline: Every Major AI Model Announcement
-  hype          AI Model Release Tracker — Evertune
-  hype          AI Model Release Calendar: Latest AI Model Releases by Date
-  hype          AI Model Release Tracker - evertune.ai
-  hype          AI Model Release Tracker: New AI Models, October 2026 | Oppe
-  hype          AI Model Releases Timeline: Latest Launches, Updated Daily
-  hype          AI Model Release Tracker: Every Confirmed 2026 Date
+  hype          AI Model Release Timeline — What Shipped When | Tech Times
+  hype          OpenAI announces 'dots' agent after scrapping launch of new 
   hype          LLM Updates (October 2026) - AI Model Releases & Provider Ac
+  hype          AI Model Release Tracker — Evertune
+  hype          OpenAI hails 'new era of artificial general intelligence' wi
+  hype          AI Model Releases Timeline: Latest Launches, Updated Daily
   hype          New AI Models: Live Release Tracker (Last 24 Hours) | BenchL
+  hype          The latest AI news we announced in September 2026
 
 9 messages published, 9 different articles
 0 breakthrough, 9 hype, 0 flagged fallbacks, 0 duplicates

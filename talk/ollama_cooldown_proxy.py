@@ -12,7 +12,7 @@ from loguru import logger
 UPSTREAM_URL = os.environ.get("OLLAMA_UPSTREAM", "http://localhost:11434")
 LISTEN_PORT = int(os.environ.get("TALK_PROXY_PORT", "11435"))
 REQUESTS_PER_COOLDOWN = int(os.environ.get("TALK_COOLDOWN_EVERY", "10"))
-COOLDOWN_SECONDS = float(os.environ.get("TALK_COOLDOWN_SECONDS", "10"))
+COOLDOWN_SECONDS = float(os.environ.get("TALK_COOLDOWN_SECONDS", "5"))
 UPSTREAM_TIMEOUT_SECONDS = 600
 PROGRESS_LOG_INTERVAL = 100
 
@@ -54,7 +54,9 @@ class CooldownProxyHandler(BaseHTTPRequestHandler):
         self.forward()
 
     def reject(self, wait_seconds: float) -> None:
-        self.respond(429, json.dumps({"error": "cooling down"}).encode(), {"Retry-After": str(math.ceil(wait_seconds))})
+        retry_after = math.ceil(wait_seconds)
+        logger.warning("429 sent, Retry-After {}s", retry_after)
+        self.respond(429, json.dumps({"error": "cooling down"}).encode(), {"Retry-After": str(retry_after)})
 
     def forward(self) -> None:
         body = self.rfile.read(int(self.headers.get("Content-Length", 0)))

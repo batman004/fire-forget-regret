@@ -161,6 +161,22 @@ class TalkPipelineTestCase(unittest.TestCase):
         return len(self.module.read_lines(self.module.MODEL_CALLS_FILE))
 
 
+class RefusalMessageTest(unittest.TestCase):
+    def test_the_message_carries_the_status_the_servers_words_and_the_wait(self):
+        for module in (plain_pipeline, lite_pipeline):
+            error = urllib.error.HTTPError(
+                "http://model", 429, "Too Many Requests", {"Retry-After": "5"}, io.BytesIO(b'{"error": "cooling down"}')
+            )
+            self.assertEqual(
+                module.refusal_message(error),
+                "the model server refused the request: HTTP 429, cooling down, Retry-After 5s",
+            )
+
+    def test_a_refusal_without_a_body_or_header_still_names_the_status(self):
+        error = urllib.error.HTTPError("http://model", 503, "Unavailable", {}, None)
+        self.assertEqual(lite_pipeline.refusal_message(error), "the model server refused the request: HTTP 503")
+
+
 class PlainPipelineTest(TalkPipelineTestCase):
     def test_a_crash_makes_the_rerun_repeat_work_and_publish_duplicates(self):
         self.internet.kill_on_model_call = 3

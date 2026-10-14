@@ -7,7 +7,7 @@ decorator makes it durable.
 talk/ai_news_pipeline.py        the plain pipeline
 talk/ai_news_pipeline_lite.py   the same pipeline, made durable with stitch-lite
 talk/ollama_cooldown_proxy.py   a rate limit in front of Ollama, for the stress run
-stitch-lite/                    the durable core: one standard-library file, 182 code lines
+stitch-lite/                    the durable core: one standard-library file, 184 code lines
 tests/                          unittest for all of the above
 screenshots/                    annotated real runs of each failure, with their raw logs
 ```
@@ -24,6 +24,7 @@ ollama pull qwen3                      # and keep Ollama running
 docker run -d -p 27017:27017 mongo:7   # or any MongoDB, see MONGO_URL
 docker run -d -p 7001:7000 karust/openserp serve   # search; macOS AirPlay owns port 7000
 export OPENSERP_URL=http://127.0.0.1:7001
+export OLLAMA_URL=http://localhost:11434/api/chat   # straight to Ollama; the default is the cooldown proxy below
 
 python -m talk.ai_news_pipeline reset
 python -m talk.ai_news_pipeline run     # then kill -9 it, switch wifi off, or stop Ollama
@@ -35,24 +36,30 @@ python -m talk.ai_news_pipeline_lite heal      # replace fallback results once t
 ```
 
 To stress it, put a rate limit in front of Ollama: after every 10 requests the proxy answers 429 with a
-`Retry-After` for 10 seconds (set `TALK_COOLDOWN_EVERY=1000 TALK_COOLDOWN_SECONDS=120` for the full-size version).
-The pipeline scripts know nothing about it.
+`Retry-After` for 5 seconds (set `TALK_COOLDOWN_EVERY=1000 TALK_COOLDOWN_SECONDS=120` for the full-size version).
+The pipeline scripts know nothing about it. They default to the proxy's port, so start it first or set `OLLAMA_URL`
+to Ollama itself as above.
 
 ```bash
-python -m talk.ollama_cooldown_proxy
-OLLAMA_URL=http://localhost:11435/api/chat python -m talk.ai_news_pipeline_lite run
+python -m talk.ollama_cooldown_proxy        # one terminal: logs "429 sent, Retry-After 5s" for every refusal
+python -m talk.ai_news_pipeline_lite run    # another: OLLAMA_URL defaults to http://localhost:11435/api/chat
 ```
 
+The plain script crashes at the first 429 and says why: `the model server refused the request: HTTP 429, cooling
+down, Retry-After 5s`. The lite script logs the same error per article, waits for exactly that long and goes on:
+`[b8edcb1b3b] analyse_with_ollama failed (... HTTP 429, cooling down, Retry-After 5s), waiting 5.0s, retry 2/4`.
+
 Knobs: `TALK_ARTICLES` (0 = forever), `TALK_PASSES`, `TALK_MAX_AGE_DAYS`, `TALK_WORKERS` (5), `STITCH_BACKOFF`
-(1.0), `TALK_ENGINES` (duckduckgo,bing), `OPENSERP_URL`, `OLLAMA_URL`, `OLLAMA_MODEL`, `MONGO_URL`;
-for the proxy `TALK_COOLDOWN_EVERY` (10), `TALK_COOLDOWN_SECONDS` (10), `TALK_PROXY_PORT` (11435).
+(1.0), `TALK_ENGINES` (duckduckgo,bing), `OPENSERP_URL`, `OLLAMA_URL` (http://localhost:11435/api/chat), `OLLAMA_MODEL`, `MONGO_URL`;
+for the proxy `TALK_COOLDOWN_EVERY` (10), `TALK_COOLDOWN_SECONDS` (5), `TALK_PROXY_PORT` (11435).
 
 The full stitch library lives in its own repository, [batman004/stitch](https://github.com/batman004/stitch).
 
 ## What durability looks like
 
-Five real runs of `ai_news_pipeline_lite.py` against live search, a local qwen3 and a local MongoDB. Each image
-numbers the lines that matter; the raw output is in [screenshots/logs/](screenshots/logs/). Every run was started
+Five real runs of `ai_news_pipeline_lite.py` against live search, a local qwen3 and a local MongoDB (15 October 2026).
+Each image numbers the lines that matter; the raw output is in [screenshots/logs/](screenshots/logs/). Every retry
+line names the article, the error and how long the pipeline waits before the next try. Every run was started
 the same way, and the recovery is always the same command.
 
 **1. The process is killed with `kill -9`.** Two articles had finished and are skipped on the rerun. The three that
@@ -75,8 +82,10 @@ alert go out, and the exit code is 2. A rerun is refused until Mongo answers, th
 
 ![a critical step halts the pipeline](screenshots/4_mongo.png)
 
-**5. Rate limits.** The cooldown proxy answers 429 with `Retry-After`, and the pipeline waits exactly that long.
-A real news site also returned 429 on one download, and that single article stopped cleanly.
+**5. Rate limits.** The cooldown proxy answers 429 with `Retry-After`, the log shows the server's error and
+`waiting 8.0s`, and the pipeline waits exactly that long. The proxy's own log has a matching `429 sent` line for every
+refusal ([screenshots/logs/5_cooldown_proxy.txt](screenshots/logs/5_cooldown_proxy.txt)). A real news site also
+returned 429 on one download, and that single article stopped cleanly.
 
 ![429 from the model and from a news site](screenshots/5_cooldown.png)
 

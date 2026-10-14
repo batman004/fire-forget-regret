@@ -101,8 +101,10 @@ async def call_with_retries(function, arguments, retries, backoff, retry_on):
         except retry_on as error:
             if attempt == retries:
                 raise
-            logger.warning("%s failed (%s), retry %s/%s", function.__name__, error, attempt + 1, retries)
-            await asyncio.sleep(delay_before_retry(error, attempt, backoff))
+            delay = delay_before_retry(error, attempt, backoff)
+            logger.warning("[%s] %s failed (%s), waiting %.1fs, retry %s/%s",
+                           getattr(current_item.get(), "key", "-"), function.__name__, error, delay, attempt + 1, retries)
+            await asyncio.sleep(delay)
 
 
 def step(retries=4, backoff=None, retry_on=(OSError,), fallback=None, critical=None):

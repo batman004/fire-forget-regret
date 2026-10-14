@@ -42,7 +42,7 @@ MAX_AGE_DAYS = float(os.environ.get("TALK_MAX_AGE_DAYS", "0"))
 SEARCH_PASSES = int(os.environ.get("TALK_PASSES", "0"))
 AGE_UNIT_DAYS = {"minute": 1 / 1440, "hour": 1 / 24, "day": 1, "week": 7, "month": 30}
 EMPTY_ROUND_PAUSE_SECONDS = float(os.environ.get("TALK_SCRAPE_PAUSE", "30"))
-OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/chat")
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11435/api/chat")
 MODEL = os.environ.get("OLLAMA_MODEL", "qwen3")
 MODEL_TIMEOUT_SECONDS = 300
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
@@ -222,6 +222,21 @@ def retry_after_seconds(error: urllib.error.HTTPError) -> float | None:
         return None
 
 
+def server_error_text(error: urllib.error.HTTPError) -> str:
+    try:
+        return str(json.loads(error.read()).get("error", ""))
+    except (ValueError, AttributeError):
+        return ""
+
+
+def refusal_message(error: urllib.error.HTTPError) -> str:
+    parts = [f"HTTP {error.code}", server_error_text(error)]
+    retry_after = retry_after_seconds(error)
+    if retry_after is not None:
+        parts.append(f"Retry-After {retry_after:g}s")
+    return "the model server refused the request: " + ", ".join(part for part in parts if part)
+
+
 def build_model_request(article: dict, text: str) -> bytes:
     prompt = f"Title: {article['title']}\n\n<article>\n{text}\n</article>"
     return json.dumps(
@@ -260,8 +275,7 @@ def call_ollama(article: dict, text: str) -> dict:
             )
         )
     except urllib.error.HTTPError as error:
-        message = f"the model server refused the request: HTTP {error.code}"
-        raise ModelRejectedError(message, retry_after_seconds(error)) from error
+        raise ModelRejectedError(refusal_message(error), retry_after_seconds(error)) from error
     with MODEL_CALLS_FILE.open("a") as calls_file:
         calls_file.write(f"{article['id']}\n")
     return parse_verdict(answer["message"]["content"])

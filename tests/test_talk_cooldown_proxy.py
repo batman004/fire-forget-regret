@@ -90,6 +90,18 @@ class CooldownProxyTest(unittest.TestCase):
         time.sleep(0.5)
         self.assertEqual(self.post(), 200)
 
+    def test_every_429_is_logged_so_the_proxy_terminal_shows_it(self):
+        messages = []
+        sink = proxy.logger.add(lambda message: messages.append(message.record["message"]), level="WARNING")
+        try:
+            self.post()
+            self.post()
+            with self.assertRaises(urllib.error.HTTPError):
+                self.post()
+        finally:
+            proxy.logger.remove(sink)
+        self.assertIn("429 sent, Retry-After 1s", messages)
+
 
 if __name__ == "__main__":
     unittest.main()

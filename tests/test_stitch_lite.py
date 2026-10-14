@@ -168,6 +168,16 @@ class RetryTest(LiteTestCase):
             self.run_items(["a"])
         sleep.assert_awaited_once_with(7)
 
+    def test_the_retry_log_names_the_item_the_error_and_the_wait(self):
+        recorder.failures[("second", "a")] = [RetryableError("HTTP 429, cooling down", retry_after=7)]
+        with mock.patch.object(stitch_lite.asyncio, "sleep", mock.AsyncMock()):
+            with self.assertLogs("stitch_lite", "WARNING") as logged:
+                self.run_items(["a"])
+        self.assertEqual(
+            logged.records[0].getMessage(),
+            "[a] second_step failed (HTTP 429, cooling down), waiting 7.0s, retry 2/3",
+        )
+
     def test_a_permanent_error_stops_only_its_item(self):
         recorder.failures[("first", "a")] = [ValueError("bad input")]
         self.run_items(["a", "b"])

@@ -1,5 +1,18 @@
-2026-10-14 18:42:56.986 | INFO     | __main__:main:86 - cooldown proxy on port 11435 in front of http://localhost:11434: 8.0s pause after every 2 requests
-2026-10-14 18:43:00.171 | WARNING  | __main__:admit:38 - served 2 requests, cooling down for 8s
-2026-10-14 18:43:08.236 | WARNING  | __main__:admit:38 - served 4 requests, cooling down for 8s
-2026-10-14 18:43:16.909 | WARNING  | __main__:admit:38 - served 6 requests, cooling down for 8s
-2026-10-14 18:43:25.174 | WARNING  | __main__:admit:38 - served 8 requests, cooling down for 8s
+2026-10-15 00:23:07.487 | INFO     | __main__:main:88 - cooldown proxy on port 11435 in front of http://localhost:11434: 8.0s pause after every 2 requests
+2026-10-15 00:23:10.649 | WARNING  | __main__:admit:38 - served 2 requests, cooling down for 8s
+2026-10-15 00:23:10.688 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:10.924 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:10.962 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:15.328 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 4s
+2026-10-15 00:23:18.926 | WARNING  | __main__:admit:38 - served 4 requests, cooling down for 8s
+2026-10-15 00:23:18.965 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:19.331 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:20.343 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 7s
+2026-10-15 00:23:21.036 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 6s
+2026-10-15 00:23:25.418 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 2s
+2026-10-15 00:23:27.038 | WARNING  | __main__:admit:38 - served 6 requests, cooling down for 8s
+2026-10-15 00:23:27.333 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:27.345 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:27.420 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s
+2026-10-15 00:23:35.348 | WARNING  | __main__:admit:38 - served 8 requests, cooling down for 8s
+2026-10-15 00:23:35.422 | WARNING  | __main__:reject:58 - 429 sent, Retry-After 8s

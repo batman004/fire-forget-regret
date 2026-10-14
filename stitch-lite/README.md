@@ -2,7 +2,7 @@
 
 The smallest durable core that still does the useful things, in one standard-library file: [stitch_lite.py](stitch_lite.py).
 
-It has **182 code lines** (blank lines, comments and docstrings not counted; lines wrapped at about 100 columns).
+It has **184 code lines** (blank lines, comments and docstrings not counted; lines wrapped at about 100 columns).
 `tests/test_stitch_lite.py` counts them and fails if the file grows past 185. The full
 library, [stitch](https://github.com/batman004/stitch), is 1,671 code lines.
 

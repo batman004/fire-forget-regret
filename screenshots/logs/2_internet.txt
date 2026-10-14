@@ -1,125 +1,125 @@
 $ python -m talk.ai_news_pipeline_lite reset
-2026-10-14 18:29:15.031 | INFO     | __main__:reset_output:402 - output cleared
+2026-10-15 00:21:58.800 | INFO     | __main__:reset_output:416 - output cleared
 [exit code 0]
 
 $ HTTP_PROXY=http://127.0.0.1:9 HTTPS_PROXY=http://127.0.0.1:9 python -m talk.ai_news_pipeline_lite run
-2026-10-14 18:29:15.757 | INFO     | __main__:run_pipeline:336 - process id 62623  (kill -9 it whenever you like)
-2026-10-14 18:29:15,786 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
-2026-10-14 18:29:15.787 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
-2026-10-14 18:29:15.787 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
-2026-10-14 18:29:15.787 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
-2026-10-14 18:29:15.788 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
-2026-10-14 18:29:15.788 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
-2026-10-14 18:29:15.788 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
-2026-10-14 18:29:15.788 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
-2026-10-14 18:29:15.788 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
-2026-10-14 18:29:15.788 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
-2026-10-14 18:29:15.789 | INFO     | __main__:process_article:318 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
-2026-10-14 18:29:15.789 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
-2026-10-14 18:29:15.789 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
-2026-10-14 18:29:15.789 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
-2026-10-14 18:29:15.790 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
-2026-10-14 18:29:15.790 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
-2026-10-14 18:29:15,795 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
-2026-10-14 18:29:15,795 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
-2026-10-14 18:29:15,795 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
-2026-10-14 18:29:15,795 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
-2026-10-14 18:29:15,796 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 2/4
-2026-10-14 18:29:15.998 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
-2026-10-14 18:29:15,999 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
-2026-10-14 18:29:16.016 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
-2026-10-14 18:29:16,017 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
-2026-10-14 18:29:16.022 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
-2026-10-14 18:29:16,023 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
-2026-10-14 18:29:16.060 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
-2026-10-14 18:29:16,061 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
-2026-10-14 18:29:16.082 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
-2026-10-14 18:29:16,084 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 3/4
-2026-10-14 18:29:16.410 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
-2026-10-14 18:29:16,411 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
-2026-10-14 18:29:16.434 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
-2026-10-14 18:29:16,435 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
-2026-10-14 18:29:16.448 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
-2026-10-14 18:29:16,449 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
-2026-10-14 18:29:16.512 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
-2026-10-14 18:29:16,514 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
-2026-10-14 18:29:16.572 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
-2026-10-14 18:29:16,574 | WARNING  | download_article failed (<urlopen error [Errno 61] Connection refused>), retry 4/4
-2026-10-14 18:29:17.136 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
-2026-10-14 18:29:17,138 | ERROR    | [b8edcb1b3b] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
-2026-10-14 18:29:17.427 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
-2026-10-14 18:29:17,427 | ERROR    | [4587286d29] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
-2026-10-14 18:29:17.494 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
-2026-10-14 18:29:17,495 | ERROR    | [6f4ef17a36] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
-2026-10-14 18:29:17.569 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
-2026-10-14 18:29:17,570 | ERROR    | [d053a35ce7] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
-2026-10-14 18:29:17.764 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
-2026-10-14 18:29:17,765 | ERROR    | [b46e0e2576] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
-2026-10-14 18:29:17.766 | SUCCESS  | __main__:run_pipeline:341 - finished
+2026-10-15 00:21:59.527 | INFO     | __main__:run_pipeline:350 - process id 83906  (kill -9 it whenever you like)
+2026-10-15 00:21:59,556 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-15 00:21:59.557 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-15 00:21:59.557 | INFO     | __main__:stream_news:173 - found AI Model Release Timeline — What Shipped When | Tech Times (techtimes.com)
+2026-10-15 00:21:59.557 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-15 00:21:59.557 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
+2026-10-15 00:21:59.557 | INFO     | __main__:stream_news:173 - found OpenAI announces 'dots' agent after scrapping launch of new  (theguardian.com)
+2026-10-15 00:21:59.557 | INFO     | __main__:process_article:332 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-15 00:21:59.558 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-15 00:21:59.558 | INFO     | __main__:process_article:332 - [f78059ec2a] AI Model Release Timeline — What Shipped When | Tech Times
+2026-10-15 00:21:59.558 | INFO     | __main__:download_article:211 - [f78059ec2a] downloading the article
+2026-10-15 00:21:59.558 | INFO     | __main__:process_article:332 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-15 00:21:59.559 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-15 00:21:59.559 | INFO     | __main__:process_article:332 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
+2026-10-15 00:21:59.559 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-15 00:21:59.559 | INFO     | __main__:process_article:332 - [007dd370ab] OpenAI announces 'dots' agent after scrapping launch of new AI model .
+2026-10-15 00:21:59.559 | INFO     | __main__:download_article:211 - [007dd370ab] downloading the article
+2026-10-15 00:21:59,565 | WARNING  | [f78059ec2a] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.3s, retry 2/4
+2026-10-15 00:21:59,565 | WARNING  | [b8edcb1b3b] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.3s, retry 2/4
+2026-10-15 00:21:59,565 | WARNING  | [4587286d29] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.2s, retry 2/4
+2026-10-15 00:21:59,565 | WARNING  | [007dd370ab] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.3s, retry 2/4
+2026-10-15 00:21:59,566 | WARNING  | [b46e0e2576] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.2s, retry 2/4
+2026-10-15 00:21:59.721 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-15 00:21:59,721 | WARNING  | [4587286d29] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.4s, retry 3/4
+2026-10-15 00:21:59.785 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-15 00:21:59,787 | WARNING  | [b46e0e2576] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.6s, retry 3/4
+2026-10-15 00:21:59.832 | INFO     | __main__:download_article:211 - [007dd370ab] downloading the article
+2026-10-15 00:21:59,834 | WARNING  | [007dd370ab] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.6s, retry 3/4
+2026-10-15 00:21:59.837 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-15 00:21:59,837 | WARNING  | [b8edcb1b3b] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.5s, retry 3/4
+2026-10-15 00:21:59.845 | INFO     | __main__:download_article:211 - [f78059ec2a] downloading the article
+2026-10-15 00:21:59,846 | WARNING  | [f78059ec2a] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.4s, retry 3/4
+2026-10-15 00:22:00.124 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-15 00:22:00,125 | WARNING  | [4587286d29] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.7s, retry 4/4
+2026-10-15 00:22:00.217 | INFO     | __main__:download_article:211 - [f78059ec2a] downloading the article
+2026-10-15 00:22:00,219 | WARNING  | [f78059ec2a] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 1.1s, retry 4/4
+2026-10-15 00:22:00.344 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-15 00:22:00,345 | WARNING  | [b8edcb1b3b] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.9s, retry 4/4
+2026-10-15 00:22:00.361 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-15 00:22:00,363 | WARNING  | [b46e0e2576] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.7s, retry 4/4
+2026-10-15 00:22:00.398 | INFO     | __main__:download_article:211 - [007dd370ab] downloading the article
+2026-10-15 00:22:00,399 | WARNING  | [007dd370ab] download_article failed (<urlopen error [Errno 61] Connection refused>), waiting 0.9s, retry 4/4
+2026-10-15 00:22:00.828 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-15 00:22:00,830 | ERROR    | [4587286d29] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
+2026-10-15 00:22:01.057 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-15 00:22:01,059 | ERROR    | [b46e0e2576] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
+2026-10-15 00:22:01.249 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-15 00:22:01,250 | ERROR    | [b8edcb1b3b] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
+2026-10-15 00:22:01.262 | INFO     | __main__:download_article:211 - [007dd370ab] downloading the article
+2026-10-15 00:22:01,263 | ERROR    | [007dd370ab] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
+2026-10-15 00:22:01.315 | INFO     | __main__:download_article:211 - [f78059ec2a] downloading the article
+2026-10-15 00:22:01,317 | ERROR    | [f78059ec2a] stopped: <urlopen error [Errno 61] Connection refused>. Run again to continue.
+2026-10-15 00:22:01.317 | SUCCESS  | __main__:run_pipeline:355 - finished
 [exit code 0]
 
 $ python -m talk.ai_news_pipeline_lite run
-2026-10-14 18:29:17.984 | INFO     | __main__:run_pipeline:336 - process id 62626  (kill -9 it whenever you like)
-2026-10-14 18:29:18,007 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
-2026-10-14 18:29:18.007 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
-2026-10-14 18:29:18.007 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
-2026-10-14 18:29:18.007 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
-2026-10-14 18:29:18.007 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
-2026-10-14 18:29:18.007 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
-2026-10-14 18:29:18.007 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
-2026-10-14 18:29:18.007 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
-2026-10-14 18:29:18.008 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
-2026-10-14 18:29:18.008 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
-2026-10-14 18:29:18.008 | INFO     | __main__:process_article:318 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
-2026-10-14 18:29:18.008 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
-2026-10-14 18:29:18.008 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
-2026-10-14 18:29:18.008 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
-2026-10-14 18:29:18.009 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
-2026-10-14 18:29:18.009 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
-2026-10-14 18:29:18.154 | DEBUG    | __main__:download_article:219 - [6f4ef17a36] downloaded 741 characters
-2026-10-14 18:29:18.155 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
-2026-10-14 18:29:18.225 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
-2026-10-14 18:29:18.225 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
-2026-10-14 18:29:18.282 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
-2026-10-14 18:29:18.282 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
-2026-10-14 18:29:18.431 | DEBUG    | __main__:download_article:219 - [d053a35ce7] downloaded 3000 characters
-2026-10-14 18:29:18.431 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
-2026-10-14 18:29:18.636 | DEBUG    | __main__:download_article:219 - [b46e0e2576] downloaded 3000 characters
-2026-10-14 18:29:18.637 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
-2026-10-14 18:29:21.036 | SUCCESS  | __main__:analyse_with_ollama:287 - [6f4ef17a36] qwen3 says hype
-2026-10-14 18:29:21.037 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
-2026-10-14 18:29:21.067 | SUCCESS  | __main__:store_in_mongo:305 - [6f4ef17a36] stored in mongo
-2026-10-14 18:29:21.067 | INFO     | __main__:publish_result:310 - [6f4ef17a36] publishing the result
-2026-10-14 18:29:21.067 | SUCCESS  | __main__:publish_result:314 - [6f4ef17a36] published: hype
-2026-10-14 18:29:23.272 | SUCCESS  | __main__:analyse_with_ollama:287 - [4587286d29] qwen3 says hype
-2026-10-14 18:29:23.273 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
-2026-10-14 18:29:23.273 | SUCCESS  | __main__:store_in_mongo:305 - [4587286d29] stored in mongo
-2026-10-14 18:29:23.273 | INFO     | __main__:publish_result:310 - [4587286d29] publishing the result
-2026-10-14 18:29:23.273 | SUCCESS  | __main__:publish_result:314 - [4587286d29] published: hype
-2026-10-14 18:29:25.208 | SUCCESS  | __main__:analyse_with_ollama:287 - [b8edcb1b3b] qwen3 says hype
-2026-10-14 18:29:25.208 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
-2026-10-14 18:29:25.209 | SUCCESS  | __main__:store_in_mongo:305 - [b8edcb1b3b] stored in mongo
-2026-10-14 18:29:25.209 | INFO     | __main__:publish_result:310 - [b8edcb1b3b] publishing the result
-2026-10-14 18:29:25.209 | SUCCESS  | __main__:publish_result:314 - [b8edcb1b3b] published: hype
-2026-10-14 18:29:27.776 | SUCCESS  | __main__:analyse_with_ollama:287 - [d053a35ce7] qwen3 says hype
-2026-10-14 18:29:27.776 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
-2026-10-14 18:29:27.776 | SUCCESS  | __main__:store_in_mongo:305 - [d053a35ce7] stored in mongo
-2026-10-14 18:29:27.776 | INFO     | __main__:publish_result:310 - [d053a35ce7] publishing the result
-2026-10-14 18:29:27.776 | SUCCESS  | __main__:publish_result:314 - [d053a35ce7] published: hype
-2026-10-14 18:29:29.724 | SUCCESS  | __main__:analyse_with_ollama:287 - [b46e0e2576] qwen3 says hype
-2026-10-14 18:29:29.724 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
-2026-10-14 18:29:29.725 | SUCCESS  | __main__:store_in_mongo:305 - [b46e0e2576] stored in mongo
-2026-10-14 18:29:29.725 | INFO     | __main__:publish_result:310 - [b46e0e2576] publishing the result
-2026-10-14 18:29:29.725 | SUCCESS  | __main__:publish_result:314 - [b46e0e2576] published: hype
-2026-10-14 18:29:29.725 | SUCCESS  | __main__:run_pipeline:341 - finished
+2026-10-15 00:22:01.575 | INFO     | __main__:run_pipeline:350 - process id 83907  (kill -9 it whenever you like)
+2026-10-15 00:22:01,597 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-15 00:22:01.598 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-15 00:22:01.598 | INFO     | __main__:stream_news:173 - found AI Model Release Timeline — What Shipped When | Tech Times (techtimes.com)
+2026-10-15 00:22:01.598 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-15 00:22:01.598 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
+2026-10-15 00:22:01.598 | INFO     | __main__:stream_news:173 - found OpenAI announces 'dots' agent after scrapping launch of new  (theguardian.com)
+2026-10-15 00:22:01.598 | INFO     | __main__:process_article:332 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-15 00:22:01.598 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-15 00:22:01.598 | INFO     | __main__:process_article:332 - [f78059ec2a] AI Model Release Timeline — What Shipped When | Tech Times
+2026-10-15 00:22:01.598 | INFO     | __main__:download_article:211 - [f78059ec2a] downloading the article
+2026-10-15 00:22:01.599 | INFO     | __main__:process_article:332 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-15 00:22:01.599 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-15 00:22:01.599 | INFO     | __main__:process_article:332 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
+2026-10-15 00:22:01.599 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-15 00:22:01.599 | INFO     | __main__:process_article:332 - [007dd370ab] OpenAI announces 'dots' agent after scrapping launch of new AI model .
+2026-10-15 00:22:01.599 | INFO     | __main__:download_article:211 - [007dd370ab] downloading the article
+2026-10-15 00:22:01.867 | DEBUG    | __main__:download_article:219 - [007dd370ab] downloaded 3000 characters
+2026-10-15 00:22:01.869 | INFO     | __main__:analyse_with_ollama:299 - [007dd370ab] asking qwen3
+2026-10-15 00:22:01.883 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
+2026-10-15 00:22:01.883 | INFO     | __main__:analyse_with_ollama:299 - [4587286d29] asking qwen3
+2026-10-15 00:22:01.968 | DEBUG    | __main__:download_article:219 - [f78059ec2a] downloaded 2449 characters
+2026-10-15 00:22:01.969 | INFO     | __main__:analyse_with_ollama:299 - [f78059ec2a] asking qwen3
+2026-10-15 00:22:02.196 | DEBUG    | __main__:download_article:219 - [b46e0e2576] downloaded 3000 characters
+2026-10-15 00:22:02.196 | INFO     | __main__:analyse_with_ollama:299 - [b46e0e2576] asking qwen3
+2026-10-15 00:22:02.207 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
+2026-10-15 00:22:02.207 | INFO     | __main__:analyse_with_ollama:299 - [b8edcb1b3b] asking qwen3
+2026-10-15 00:22:04.282 | SUCCESS  | __main__:analyse_with_ollama:301 - [4587286d29] qwen3 says hype
+2026-10-15 00:22:04.283 | INFO     | __main__:store_in_mongo:317 - [4587286d29] storing the verdict in mongo
+2026-10-15 00:22:04.311 | SUCCESS  | __main__:store_in_mongo:319 - [4587286d29] stored in mongo
+2026-10-15 00:22:04.311 | INFO     | __main__:publish_result:324 - [4587286d29] publishing the result
+2026-10-15 00:22:04.311 | SUCCESS  | __main__:publish_result:328 - [4587286d29] published: hype
+2026-10-15 00:22:06.109 | SUCCESS  | __main__:analyse_with_ollama:301 - [007dd370ab] qwen3 says hype
+2026-10-15 00:22:06.109 | INFO     | __main__:store_in_mongo:317 - [007dd370ab] storing the verdict in mongo
+2026-10-15 00:22:06.109 | SUCCESS  | __main__:store_in_mongo:319 - [007dd370ab] stored in mongo
+2026-10-15 00:22:06.109 | INFO     | __main__:publish_result:324 - [007dd370ab] publishing the result
+2026-10-15 00:22:06.109 | SUCCESS  | __main__:publish_result:328 - [007dd370ab] published: hype
+2026-10-15 00:22:08.199 | SUCCESS  | __main__:analyse_with_ollama:301 - [f78059ec2a] qwen3 says hype
+2026-10-15 00:22:08.199 | INFO     | __main__:store_in_mongo:317 - [f78059ec2a] storing the verdict in mongo
+2026-10-15 00:22:08.200 | SUCCESS  | __main__:store_in_mongo:319 - [f78059ec2a] stored in mongo
+2026-10-15 00:22:08.200 | INFO     | __main__:publish_result:324 - [f78059ec2a] publishing the result
+2026-10-15 00:22:08.200 | SUCCESS  | __main__:publish_result:328 - [f78059ec2a] published: hype
+2026-10-15 00:22:10.520 | SUCCESS  | __main__:analyse_with_ollama:301 - [b46e0e2576] qwen3 says hype
+2026-10-15 00:22:10.520 | INFO     | __main__:store_in_mongo:317 - [b46e0e2576] storing the verdict in mongo
+2026-10-15 00:22:10.521 | SUCCESS  | __main__:store_in_mongo:319 - [b46e0e2576] stored in mongo
+2026-10-15 00:22:10.521 | INFO     | __main__:publish_result:324 - [b46e0e2576] publishing the result
+2026-10-15 00:22:10.521 | SUCCESS  | __main__:publish_result:328 - [b46e0e2576] published: hype
+2026-10-15 00:22:12.533 | SUCCESS  | __main__:analyse_with_ollama:301 - [b8edcb1b3b] qwen3 says hype
+2026-10-15 00:22:12.533 | INFO     | __main__:store_in_mongo:317 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-15 00:22:12.534 | SUCCESS  | __main__:store_in_mongo:319 - [b8edcb1b3b] stored in mongo
+2026-10-15 00:22:12.534 | INFO     | __main__:publish_result:324 - [b8edcb1b3b] publishing the result
+2026-10-15 00:22:12.534 | SUCCESS  | __main__:publish_result:328 - [b8edcb1b3b] published: hype
+2026-10-15 00:22:12.534 | SUCCESS  | __main__:run_pipeline:355 - finished
 [exit code 0]
 
 $ python -m talk.ai_news_pipeline_lite report
-  hype          AI Model Release Tracker - evertune.ai
   hype          AI Model Launch Timeline: Every Major AI Model Announcement
-  hype          AI Model Release Tracker — Evertune
-  hype          AI Model Release Tracker: New AI Models, October 2026 | Oppe
+  hype          OpenAI announces 'dots' agent after scrapping launch of new 
+  hype          AI Model Release Timeline — What Shipped When | Tech Times
   hype          LLM Updates (October 2026) - AI Model Releases & Provider Ac
+  hype          AI Model Release Tracker — Evertune
 
 5 messages published, 5 different articles
 0 breakthrough, 5 hype, 0 flagged fallbacks, 0 duplicates

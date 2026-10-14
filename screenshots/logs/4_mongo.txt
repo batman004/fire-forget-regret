@@ -1,124 +1,125 @@
 $ python -m talk.ai_news_pipeline_lite reset
-2026-10-14 18:29:47.244 | INFO     | __main__:reset_output:402 - output cleared
+2026-10-15 00:22:29.797 | INFO     | __main__:reset_output:416 - output cleared
 [exit code 0]
 
 $ MONGO_URL=mongodb://127.0.0.1:27018 python -m talk.ai_news_pipeline_lite run
-2026-10-14 18:29:47.964 | INFO     | __main__:run_pipeline:336 - process id 62658  (kill -9 it whenever you like)
-2026-10-14 18:29:47,987 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
-2026-10-14 18:29:47.988 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
-2026-10-14 18:29:47.988 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
-2026-10-14 18:29:47.988 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
-2026-10-14 18:29:47.988 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
-2026-10-14 18:29:47.988 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
-2026-10-14 18:29:47.988 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
-2026-10-14 18:29:47.988 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
-2026-10-14 18:29:47.988 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
-2026-10-14 18:29:47.988 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
-2026-10-14 18:29:47.989 | INFO     | __main__:process_article:318 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
-2026-10-14 18:29:47.989 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
-2026-10-14 18:29:47.989 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
-2026-10-14 18:29:47.989 | INFO     | __main__:download_article:211 - [6f4ef17a36] downloading the article
-2026-10-14 18:29:47.990 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
-2026-10-14 18:29:47.990 | INFO     | __main__:download_article:211 - [d053a35ce7] downloading the article
-2026-10-14 18:29:48.159 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
-2026-10-14 18:29:48.160 | INFO     | __main__:analyse_with_ollama:285 - [4587286d29] asking qwen3
-2026-10-14 18:29:48.265 | DEBUG    | __main__:download_article:219 - [6f4ef17a36] downloaded 741 characters
-2026-10-14 18:29:48.265 | INFO     | __main__:analyse_with_ollama:285 - [6f4ef17a36] asking qwen3
-2026-10-14 18:29:48.409 | DEBUG    | __main__:download_article:219 - [d053a35ce7] downloaded 3000 characters
-2026-10-14 18:29:48.409 | INFO     | __main__:analyse_with_ollama:285 - [d053a35ce7] asking qwen3
-2026-10-14 18:29:48.586 | DEBUG    | __main__:download_article:219 - [b46e0e2576] downloaded 3000 characters
-2026-10-14 18:29:48.587 | INFO     | __main__:analyse_with_ollama:285 - [b46e0e2576] asking qwen3
-2026-10-14 18:29:48.642 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
-2026-10-14 18:29:48.642 | INFO     | __main__:analyse_with_ollama:285 - [b8edcb1b3b] asking qwen3
-2026-10-14 18:29:50.466 | SUCCESS  | __main__:analyse_with_ollama:287 - [4587286d29] qwen3 says hype
-2026-10-14 18:29:50.467 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
-2026-10-14 18:29:52.184 | SUCCESS  | __main__:analyse_with_ollama:287 - [6f4ef17a36] qwen3 says hype
-2026-10-14 18:29:52.185 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
-2026-10-14 18:29:54.753 | SUCCESS  | __main__:analyse_with_ollama:287 - [d053a35ce7] qwen3 says hype
-2026-10-14 18:29:54.753 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
-2026-10-14 18:29:55,522 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 2/4
-2026-10-14 18:29:55.780 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
-2026-10-14 18:29:56.699 | SUCCESS  | __main__:analyse_with_ollama:287 - [b46e0e2576] qwen3 says hype
-2026-10-14 18:29:56.700 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
-2026-10-14 18:29:57,541 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 2/4
-2026-10-14 18:29:57.786 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
-2026-10-14 18:29:58.637 | SUCCESS  | __main__:analyse_with_ollama:287 - [b8edcb1b3b] qwen3 says hype
-2026-10-14 18:29:58.638 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
-2026-10-14 18:30:00,065 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 2/4
-2026-10-14 18:30:00.337 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
-2026-10-14 18:30:01,075 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 3/4
-2026-10-14 18:30:01.415 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
-2026-10-14 18:30:02,084 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 2/4
-2026-10-14 18:30:02.270 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
-2026-10-14 18:30:03,094 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 3/4
-2026-10-14 18:30:03.604 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
-2026-10-14 18:30:04,104 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 2/4
-2026-10-14 18:30:04.287 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
-2026-10-14 18:30:05,615 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 3/4
-2026-10-14 18:30:06.189 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
-2026-10-14 18:30:06,626 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 4/4
-2026-10-14 18:30:07.548 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
-2026-10-14 18:30:07,635 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 3/4
-2026-10-14 18:30:07.949 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
-2026-10-14 18:30:08,644 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 4/4
-2026-10-14 18:30:09.418 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
-2026-10-14 18:30:09,653 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 3/4
-2026-10-14 18:30:10.173 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
-2026-10-14 18:30:11,670 | WARNING  | store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), retry 4/4
-2026-10-14 18:30:12.684 | CRITICAL | __main__:send_alert:329 - ALERT via email to oncall@example.com: store_in_mongo failed for good: 127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
-2026-10-14 18:30:12.685 | CRITICAL | __main__:send_alert:329 - ALERT via slack to #data-alerts: store_in_mongo failed for good: 127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
-2026-10-14 18:30:15,208 | CRITICAL | pipeline halted: store_in_mongo failed for good: 127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6acfadfec0abf919c5f487f9, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+2026-10-15 00:22:30.535 | INFO     | __main__:run_pipeline:350 - process id 83997  (kill -9 it whenever you like)
+2026-10-15 00:22:30,557 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-15 00:22:30.558 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-15 00:22:30.558 | INFO     | __main__:stream_news:173 - found AI Model Release Timeline — What Shipped When | Tech Times (techtimes.com)
+2026-10-15 00:22:30.558 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-15 00:22:30.558 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
+2026-10-15 00:22:30.558 | INFO     | __main__:stream_news:173 - found OpenAI announces 'dots' agent after scrapping launch of new  (theguardian.com)
+2026-10-15 00:22:30.558 | INFO     | __main__:process_article:332 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-15 00:22:30.558 | INFO     | __main__:download_article:211 - [4587286d29] downloading the article
+2026-10-15 00:22:30.559 | INFO     | __main__:process_article:332 - [f78059ec2a] AI Model Release Timeline — What Shipped When | Tech Times
+2026-10-15 00:22:30.559 | INFO     | __main__:download_article:211 - [f78059ec2a] downloading the article
+2026-10-15 00:22:30.559 | INFO     | __main__:process_article:332 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-15 00:22:30.559 | INFO     | __main__:download_article:211 - [b8edcb1b3b] downloading the article
+2026-10-15 00:22:30.559 | INFO     | __main__:process_article:332 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
+2026-10-15 00:22:30.559 | INFO     | __main__:download_article:211 - [b46e0e2576] downloading the article
+2026-10-15 00:22:30.560 | INFO     | __main__:process_article:332 - [007dd370ab] OpenAI announces 'dots' agent after scrapping launch of new AI model .
+2026-10-15 00:22:30.560 | INFO     | __main__:download_article:211 - [007dd370ab] downloading the article
+2026-10-15 00:22:30.732 | DEBUG    | __main__:download_article:219 - [007dd370ab] downloaded 3000 characters
+2026-10-15 00:22:30.733 | INFO     | __main__:analyse_with_ollama:299 - [007dd370ab] asking qwen3
+2026-10-15 00:22:30.776 | DEBUG    | __main__:download_article:219 - [4587286d29] downloaded 3000 characters
+2026-10-15 00:22:30.776 | INFO     | __main__:analyse_with_ollama:299 - [4587286d29] asking qwen3
+2026-10-15 00:22:30.801 | DEBUG    | __main__:download_article:219 - [b8edcb1b3b] downloaded 3000 characters
+2026-10-15 00:22:30.801 | INFO     | __main__:analyse_with_ollama:299 - [b8edcb1b3b] asking qwen3
+2026-10-15 00:22:30.865 | DEBUG    | __main__:download_article:219 - [f78059ec2a] downloaded 2449 characters
+2026-10-15 00:22:30.865 | INFO     | __main__:analyse_with_ollama:299 - [f78059ec2a] asking qwen3
+2026-10-15 00:22:31.039 | DEBUG    | __main__:download_article:219 - [b46e0e2576] downloaded 3000 characters
+2026-10-15 00:22:31.039 | INFO     | __main__:analyse_with_ollama:299 - [b46e0e2576] asking qwen3
+2026-10-15 00:22:32.741 | SUCCESS  | __main__:analyse_with_ollama:301 - [007dd370ab] qwen3 says hype
+2026-10-15 00:22:32.741 | INFO     | __main__:store_in_mongo:317 - [007dd370ab] storing the verdict in mongo
+2026-10-15 00:22:35.157 | SUCCESS  | __main__:analyse_with_ollama:301 - [4587286d29] qwen3 says hype
+2026-10-15 00:22:35.157 | INFO     | __main__:store_in_mongo:317 - [4587286d29] storing the verdict in mongo
+2026-10-15 00:22:37.179 | SUCCESS  | __main__:analyse_with_ollama:301 - [b8edcb1b3b] qwen3 says hype
+2026-10-15 00:22:37.179 | INFO     | __main__:store_in_mongo:317 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-15 00:22:37,792 | WARNING  | [007dd370ab] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.3s, retry 2/4
+2026-10-15 00:22:38.091 | INFO     | __main__:store_in_mongo:317 - [007dd370ab] storing the verdict in mongo
+2026-10-15 00:22:39.321 | SUCCESS  | __main__:analyse_with_ollama:301 - [f78059ec2a] qwen3 says hype
+2026-10-15 00:22:39.321 | INFO     | __main__:store_in_mongo:317 - [f78059ec2a] storing the verdict in mongo
+2026-10-15 00:22:40,318 | WARNING  | [4587286d29] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.2s, retry 2/4
+2026-10-15 00:22:40.564 | INFO     | __main__:store_in_mongo:317 - [4587286d29] storing the verdict in mongo
+2026-10-15 00:22:41.739 | SUCCESS  | __main__:analyse_with_ollama:301 - [b46e0e2576] qwen3 says hype
+2026-10-15 00:22:41.739 | INFO     | __main__:store_in_mongo:317 - [b46e0e2576] storing the verdict in mongo
+2026-10-15 00:22:42,327 | WARNING  | [b8edcb1b3b] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.2s, retry 2/4
+2026-10-15 00:22:42.517 | INFO     | __main__:store_in_mongo:317 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-15 00:22:43,337 | WARNING  | [007dd370ab] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.4s, retry 3/4
+2026-10-15 00:22:43.740 | INFO     | __main__:store_in_mongo:317 - [007dd370ab] storing the verdict in mongo
+2026-10-15 00:22:44,347 | WARNING  | [f78059ec2a] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.2s, retry 2/4
+2026-10-15 00:22:44.593 | INFO     | __main__:store_in_mongo:317 - [f78059ec2a] storing the verdict in mongo
+2026-10-15 00:22:45,858 | WARNING  | [4587286d29] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.5s, retry 3/4
+2026-10-15 00:22:46.403 | INFO     | __main__:store_in_mongo:317 - [4587286d29] storing the verdict in mongo
+2026-10-15 00:22:46,868 | WARNING  | [b46e0e2576] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.2s, retry 2/4
+2026-10-15 00:22:47.057 | INFO     | __main__:store_in_mongo:317 - [b46e0e2576] storing the verdict in mongo
+2026-10-15 00:22:47,875 | WARNING  | [b8edcb1b3b] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.4s, retry 3/4
+2026-10-15 00:22:48.240 | INFO     | __main__:store_in_mongo:317 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-15 00:22:48,883 | WARNING  | [007dd370ab] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 1.0s, retry 4/4
+2026-10-15 00:22:49,889 | WARNING  | [f78059ec2a] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.4s, retry 3/4
+2026-10-15 00:22:49.895 | INFO     | __main__:store_in_mongo:317 - [007dd370ab] storing the verdict in mongo
+2026-10-15 00:22:50.246 | INFO     | __main__:store_in_mongo:317 - [f78059ec2a] storing the verdict in mongo
+2026-10-15 00:22:51,407 | WARNING  | [4587286d29] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.8s, retry 4/4
+2026-10-15 00:22:52.174 | INFO     | __main__:store_in_mongo:317 - [4587286d29] storing the verdict in mongo
+2026-10-15 00:22:52,414 | WARNING  | [b46e0e2576] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.5s, retry 3/4
+2026-10-15 00:22:52.899 | INFO     | __main__:store_in_mongo:317 - [b46e0e2576] storing the verdict in mongo
+2026-10-15 00:22:53,425 | WARNING  | [b8edcb1b3b] store_in_mongo failed (127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>), waiting 0.7s, retry 4/4
+2026-10-15 00:22:54.110 | INFO     | __main__:store_in_mongo:317 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-15 00:22:54.939 | CRITICAL | __main__:send_alert:343 - ALERT via email to oncall@example.com: store_in_mongo failed for good: 127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+2026-10-15 00:22:54.940 | CRITICAL | __main__:send_alert:343 - ALERT via slack to #data-alerts: store_in_mongo failed for good: 127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+2026-10-15 00:22:59,475 | CRITICAL | pipeline halted: store_in_mongo failed for good: 127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 6ad000a84da648bea3d6a477, topology_type: Unknown, servers: [<ServerDescription ('127.0.0.1', 27018) server_type: Unknown, rtt: None, error=AutoReconnect('127.0.0.1:27018: [Errno 61] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
 [exit code 2]
 
 $ MONGO_URL=mongodb://127.0.0.1:27018 python -m talk.ai_news_pipeline_lite run
-2026-10-14 18:30:15.967 | INFO     | __main__:run_pipeline:336 - process id 62712  (kill -9 it whenever you like)
-2026-10-14 18:30:21,016 | CRITICAL | pipeline halted: store_in_mongo is still unhealthy, not starting
+2026-10-15 00:23:00.234 | INFO     | __main__:run_pipeline:350 - process id 84018  (kill -9 it whenever you like)
+2026-10-15 00:23:05,280 | CRITICAL | pipeline halted: store_in_mongo is still unhealthy, not starting
 [exit code 2]
 
 $ python -m talk.ai_news_pipeline_lite run
-2026-10-14 18:30:21.710 | INFO     | __main__:run_pipeline:336 - process id 62721  (kill -9 it whenever you like)
-2026-10-14 18:30:21.713 | SUCCESS  | __main__:send_alert:329 - ALERT via email to oncall@example.com: store_in_mongo is healthy again, the run resumes
-2026-10-14 18:30:21.713 | SUCCESS  | __main__:send_alert:329 - ALERT via slack to #data-alerts: store_in_mongo is healthy again, the run resumes
-2026-10-14 18:30:21,735 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
-2026-10-14 18:30:21.736 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
-2026-10-14 18:30:21.736 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
-2026-10-14 18:30:21.736 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
-2026-10-14 18:30:21.736 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker - evertune.ai (evertune.ai)
-2026-10-14 18:30:21.736 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker: New AI Models, October 2026 | Oppe (opper.ai)
-2026-10-14 18:30:21.736 | INFO     | __main__:process_article:318 - [b8edcb1b3b] AI Model Release Tracker — Evertune
-2026-10-14 18:30:21.736 | INFO     | __main__:store_in_mongo:303 - [b8edcb1b3b] storing the verdict in mongo
-2026-10-14 18:30:21.736 | INFO     | __main__:process_article:318 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
-2026-10-14 18:30:21.736 | INFO     | __main__:store_in_mongo:303 - [4587286d29] storing the verdict in mongo
-2026-10-14 18:30:21.737 | INFO     | __main__:process_article:318 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
-2026-10-14 18:30:21.737 | INFO     | __main__:store_in_mongo:303 - [b46e0e2576] storing the verdict in mongo
-2026-10-14 18:30:21.737 | INFO     | __main__:process_article:318 - [6f4ef17a36] AI Model Release Tracker - evertune.ai
-2026-10-14 18:30:21.737 | INFO     | __main__:store_in_mongo:303 - [6f4ef17a36] storing the verdict in mongo
-2026-10-14 18:30:21.737 | INFO     | __main__:process_article:318 - [d053a35ce7] AI Model Release Tracker: New AI Models, October 2026 | Opper AI
-2026-10-14 18:30:21.738 | INFO     | __main__:store_in_mongo:303 - [d053a35ce7] storing the verdict in mongo
-2026-10-14 18:30:21.851 | SUCCESS  | __main__:store_in_mongo:305 - [b8edcb1b3b] stored in mongo
-2026-10-14 18:30:21.852 | INFO     | __main__:publish_result:310 - [b8edcb1b3b] publishing the result
-2026-10-14 18:30:21.855 | SUCCESS  | __main__:publish_result:314 - [b8edcb1b3b] published: hype
-2026-10-14 18:30:21.911 | SUCCESS  | __main__:store_in_mongo:305 - [4587286d29] stored in mongo
-2026-10-14 18:30:21.913 | INFO     | __main__:publish_result:310 - [4587286d29] publishing the result
-2026-10-14 18:30:21.915 | SUCCESS  | __main__:publish_result:314 - [4587286d29] published: hype
-2026-10-14 18:30:21.920 | SUCCESS  | __main__:store_in_mongo:305 - [b46e0e2576] stored in mongo
-2026-10-14 18:30:21.921 | INFO     | __main__:publish_result:310 - [b46e0e2576] publishing the result
-2026-10-14 18:30:21.921 | SUCCESS  | __main__:publish_result:314 - [b46e0e2576] published: hype
-2026-10-14 18:30:21.921 | SUCCESS  | __main__:store_in_mongo:305 - [d053a35ce7] stored in mongo
-2026-10-14 18:30:21.921 | INFO     | __main__:publish_result:310 - [d053a35ce7] publishing the result
-2026-10-14 18:30:21.921 | SUCCESS  | __main__:publish_result:314 - [d053a35ce7] published: hype
-2026-10-14 18:30:21.921 | SUCCESS  | __main__:store_in_mongo:305 - [6f4ef17a36] stored in mongo
-2026-10-14 18:30:21.921 | INFO     | __main__:publish_result:310 - [6f4ef17a36] publishing the result
-2026-10-14 18:30:21.921 | SUCCESS  | __main__:publish_result:314 - [6f4ef17a36] published: hype
-2026-10-14 18:30:21.921 | SUCCESS  | __main__:run_pipeline:341 - finished
+2026-10-15 00:23:06.043 | INFO     | __main__:run_pipeline:350 - process id 84021  (kill -9 it whenever you like)
+2026-10-15 00:23:06.047 | SUCCESS  | __main__:send_alert:343 - ALERT via email to oncall@example.com: store_in_mongo is healthy again, the run resumes
+2026-10-15 00:23:06.047 | SUCCESS  | __main__:send_alert:343 - ALERT via slack to #data-alerts: store_in_mongo is healthy again, the run resumes
+2026-10-15 00:23:06,078 | INFO     | HTTP Request: GET http://127.0.0.1:7001/duckduckgo/search?text=AI+model+announces&limit=10 "HTTP/1.1 200 OK"
+2026-10-15 00:23:06.078 | INFO     | __main__:stream_news:173 - found AI Model Launch Timeline: Every Major AI Model Announcement (techpp.com)
+2026-10-15 00:23:06.078 | INFO     | __main__:stream_news:173 - found AI Model Release Timeline — What Shipped When | Tech Times (techtimes.com)
+2026-10-15 00:23:06.078 | INFO     | __main__:stream_news:173 - found AI Model Release Tracker — Evertune (models.evertune.ai)
+2026-10-15 00:23:06.078 | INFO     | __main__:stream_news:173 - found LLM Updates (October 2026) - AI Model Releases & Provider Ac (lmmarketcap.com)
+2026-10-15 00:23:06.078 | INFO     | __main__:stream_news:173 - found OpenAI announces 'dots' agent after scrapping launch of new  (theguardian.com)
+2026-10-15 00:23:06.078 | INFO     | __main__:process_article:332 - [4587286d29] AI Model Launch Timeline: Every Major AI Model Announcement
+2026-10-15 00:23:06.078 | INFO     | __main__:store_in_mongo:317 - [4587286d29] storing the verdict in mongo
+2026-10-15 00:23:06.078 | INFO     | __main__:process_article:332 - [f78059ec2a] AI Model Release Timeline — What Shipped When | Tech Times
+2026-10-15 00:23:06.079 | INFO     | __main__:store_in_mongo:317 - [f78059ec2a] storing the verdict in mongo
+2026-10-15 00:23:06.079 | INFO     | __main__:process_article:332 - [b8edcb1b3b] AI Model Release Tracker — Evertune
+2026-10-15 00:23:06.079 | INFO     | __main__:store_in_mongo:317 - [b8edcb1b3b] storing the verdict in mongo
+2026-10-15 00:23:06.079 | INFO     | __main__:process_article:332 - [b46e0e2576] LLM Updates (October 2026) - AI Model Releases & Provider Activity
+2026-10-15 00:23:06.081 | INFO     | __main__:store_in_mongo:317 - [b46e0e2576] storing the verdict in mongo
+2026-10-15 00:23:06.081 | INFO     | __main__:process_article:332 - [007dd370ab] OpenAI announces 'dots' agent after scrapping launch of new AI model .
+2026-10-15 00:23:06.082 | INFO     | __main__:store_in_mongo:317 - [007dd370ab] storing the verdict in mongo
+2026-10-15 00:23:06.143 | SUCCESS  | __main__:store_in_mongo:319 - [4587286d29] stored in mongo
+2026-10-15 00:23:06.143 | INFO     | __main__:publish_result:324 - [4587286d29] publishing the result
+2026-10-15 00:23:06.147 | SUCCESS  | __main__:publish_result:328 - [4587286d29] published: hype
+2026-10-15 00:23:06.198 | SUCCESS  | __main__:store_in_mongo:319 - [b8edcb1b3b] stored in mongo
+2026-10-15 00:23:06.198 | INFO     | __main__:publish_result:324 - [b8edcb1b3b] publishing the result
+2026-10-15 00:23:06.202 | SUCCESS  | __main__:publish_result:328 - [b8edcb1b3b] published: hype
+2026-10-15 00:23:06.203 | SUCCESS  | __main__:store_in_mongo:319 - [f78059ec2a] stored in mongo
+2026-10-15 00:23:06.203 | INFO     | __main__:publish_result:324 - [f78059ec2a] publishing the result
+2026-10-15 00:23:06.203 | SUCCESS  | __main__:publish_result:328 - [f78059ec2a] published: hype
+2026-10-15 00:23:06.203 | SUCCESS  | __main__:store_in_mongo:319 - [b46e0e2576] stored in mongo
+2026-10-15 00:23:06.206 | INFO     | __main__:publish_result:324 - [b46e0e2576] publishing the result
+2026-10-15 00:23:06.206 | SUCCESS  | __main__:publish_result:328 - [b46e0e2576] published: hype
+2026-10-15 00:23:06.206 | SUCCESS  | __main__:store_in_mongo:319 - [007dd370ab] stored in mongo
+2026-10-15 00:23:06.206 | INFO     | __main__:publish_result:324 - [007dd370ab] publishing the result
+2026-10-15 00:23:06.207 | SUCCESS  | __main__:publish_result:328 - [007dd370ab] published: hype
+2026-10-15 00:23:06.207 | SUCCESS  | __main__:run_pipeline:355 - finished
 [exit code 0]
 
 $ python -m talk.ai_news_pipeline_lite report
-  hype          AI Model Release Tracker — Evertune
   hype          AI Model Launch Timeline: Every Major AI Model Announcement
+  hype          AI Model Release Tracker — Evertune
+  hype          AI Model Release Timeline — What Shipped When | Tech Times
   hype          LLM Updates (October 2026) - AI Model Releases & Provider Ac
-  hype          AI Model Release Tracker: New AI Models, October 2026 | Oppe
-  hype          AI Model Release Tracker - evertune.ai
+  hype          OpenAI announces 'dots' agent after scrapping launch of new 
 
 5 messages published, 5 different articles
 0 breakthrough, 5 hype, 0 flagged fallbacks, 0 duplicates
