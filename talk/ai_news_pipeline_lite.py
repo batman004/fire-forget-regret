@@ -280,7 +280,9 @@ def call_ollama(article: dict, text: str) -> dict:
             )
         )
     except urllib.error.HTTPError as error:
-        raise ModelRejectedError(refusal_message(error), retry_after_seconds(error)) from error
+        message = refusal_message(error)
+        logger.warning("[{}] {}", article["id"], message)
+        raise ModelRejectedError(message, retry_after_seconds(error)) from error
     with MODEL_CALLS_FILE.open("a") as calls_file:
         calls_file.write(f"{article['id']}\n")
     return parse_verdict(answer["message"]["content"])

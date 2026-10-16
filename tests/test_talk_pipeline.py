@@ -11,6 +11,7 @@ import urllib.error
 from pathlib import Path
 from unittest import mock
 
+from loguru import logger
 from openserp import SERPError
 from pymongo.errors import ConnectionFailure
 from stitch_lite import Halted
@@ -187,6 +188,17 @@ class PlainPipelineTest(TalkPipelineTestCase):
         published = self.published()
         self.assertEqual((len(published), len({record["id"] for record in published})), (ARTICLE_COUNT + 2, ARTICLE_COUNT))
         self.assertEqual(self.model_calls(), ARTICLE_COUNT + 2)
+
+    def test_a_refusal_is_logged_with_the_article_id_when_it_happens(self):
+        self.internet.model_refuses = True
+        lines = []
+        sink = logger.add(lambda message: lines.append(message.record["message"]), level="WARNING")
+        try:
+            with self.assertRaises(ExceptionGroup):
+                self.run_quietly(self.module.run_pipeline())
+        finally:
+            logger.remove(sink)
+        self.assertTrue(any("the model server refused the request: HTTP 429" in line for line in lines))
 
     def test_the_model_refusing_stops_the_whole_run(self):
         self.internet.model_refuses = True
